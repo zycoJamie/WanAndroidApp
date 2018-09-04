@@ -1,0 +1,41 @@
+ext {
+    android = [
+            applicationId            : "com.example.levi.wanandroidapp",
+            compileSdkVersion        : 27,
+            minSdkVersion            : 15,
+            targetSdkVersion         : 27,
+            versionCode              : 1,
+            versionName              : "1.0",
+            testInstrumentationRunner: "android.support.test.runner.AndroidJUnitRunner"
+    ]
+
+    version = [
+            supportLibraryVersion  : "27.1.1",
+            constraintLayoutVersion: "1.1.3",
+            junitVersion           : "4.12",
+            testRunner             : "1.0.2",
+            testEspresso           : "3.0.2",
+            //fragmentation
+            fragmentationVersion   : "1.3.5",
+            //dagger
+            daggerVersion          : "2.4",
+    ]
+
+    dependencies = [
+            "appcompat-v7"     : "com.android.support:appcompat-v7:${version["supportLibraryVersion"]}",
+            "constraint-layout": "com.android.support.constraint:constraint-layout:${version["constraintLayoutVersion"]}",
+            "junit"            : "junit:junit:${version["junitVersion"]}",
+            "runner"           : "com.android.support.test:runner:${version["testRunner"]}",
+            "espresso-core"    : "com.android.support.test.espresso:espresso-core:${version["testEspresso"]}",
+
+            //fragmentation
+            "fragmentation"    : "me.yokeyword:fragmentation:${version["fragmentationVersion"]}",
+
+            //dagger
+            "dagger"           : "com.google.dagger:dagger:${version["daggerVersion"]}",
+            "dagger-compiler"  : "com.google.dagger:dagger-compiler:${version["daggerVersion"]}",
+            "java-annotation"  : "org.glassfish:javax.annotation:10.0-b28",
+    ]
+
+
+}

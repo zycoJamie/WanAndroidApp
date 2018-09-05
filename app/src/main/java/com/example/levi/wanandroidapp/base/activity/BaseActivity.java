@@ -9,21 +9,95 @@ import android.view.View;
 import com.example.levi.wanandroidapp.base.app.MyApplication;
 import com.example.levi.wanandroidapp.base.presenter.AbsPresenter;
 import com.example.levi.wanandroidapp.base.view.AbstractView;
+import com.example.levi.wanandroidapp.dagger.component.ActivityComponent;
+import com.example.levi.wanandroidapp.dagger.component.DaggerActivityComponent;
+import com.example.levi.wanandroidapp.dagger.module.ActivityModule;
+import com.example.levi.wanandroidapp.util.network.NetUtils;
 import com.example.levi.wanandroidapp.util.network.NetworkBroadcastReceiver;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
+import javax.inject.Inject;
+
+import butterknife.ButterKnife;
 import me.yokeyword.fragmentation.SupportActivity;
 
-public class BaseActivity<T extends AbsPresenter> extends SupportActivity implements AbstractView, NetworkBroadcastReceiver.NetEvent {
+public abstract class BaseActivity<T extends AbsPresenter> extends SupportActivity implements AbstractView, NetworkBroadcastReceiver.NetEvent {
     protected MyApplication mCcontext;
     protected BaseActivity mActivity;
-
+    protected ActivityComponent mActivityComponent;
     private int mNetMobile;
     public static NetworkBroadcastReceiver.NetEvent gEventActivity;
+
+    @Inject
+    protected T mPresenter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(getLayoutId());
+        mCcontext = MyApplication.getInstance();
+        mActivity = this;
+        gEventActivity = this;
+        initActivityComponent();
+        initBind();
+        initInject();
+        onViewCreated();
+        initUI();
+        initToolbar();
+        initData();
+    }
 
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onMessageEvent() {
+
+    }
+
+    private void initToolbar() {
+
+    }
+
+    /**
+     * 初始化数据
+     */
+    protected abstract void initData();
+
+    /**
+     * 初始化UI
+     */
+    protected abstract void initUI();
+
+    @SuppressWarnings("unchecked")
+    private void onViewCreated() {
+        if (mPresenter != null) {
+            mPresenter.attachView(this);
+        }
+    }
+
+    /**
+     * dagger初始化
+     */
+    protected void initInject() {
+
+    }
+
+    /**
+     * 获取布局id
+     */
+    protected abstract int getLayoutId();
+
+    private void initActivityComponent() {
+        mActivityComponent = DaggerActivityComponent.builder()
+                .applicationComponent(MyApplication.getInstance().getApplicationComponent())
+                .activityModule(new ActivityModule(this)).build();
+    }
+
+    public void initBind() {
+        ButterKnife.bind(this);
+        EventBus.getDefault().register(this);
+        NetUtils.init(MyApplication.getInstance());
     }
 
     @Override

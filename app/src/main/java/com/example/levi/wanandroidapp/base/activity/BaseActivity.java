@@ -12,6 +12,7 @@ import com.example.levi.wanandroidapp.base.view.AbstractView;
 import com.example.levi.wanandroidapp.dagger.component.ActivityComponent;
 import com.example.levi.wanandroidapp.dagger.component.DaggerActivityComponent;
 import com.example.levi.wanandroidapp.dagger.module.ActivityModule;
+import com.example.levi.wanandroidapp.model.constant.MessageEvent;
 import com.example.levi.wanandroidapp.util.network.NetUtils;
 import com.example.levi.wanandroidapp.util.network.NetworkBroadcastReceiver;
 
@@ -29,6 +30,7 @@ public abstract class BaseActivity<T extends AbsPresenter> extends SupportActivi
     protected BaseActivity mActivity;
     protected ActivityComponent mActivityComponent;
     private int mNetMobile;
+    private boolean isNetwork;
     public static NetworkBroadcastReceiver.NetEvent gEventActivity;
 
     @Inject
@@ -51,7 +53,7 @@ public abstract class BaseActivity<T extends AbsPresenter> extends SupportActivi
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onMessageEvent() {
+    public void onMessageEvent(MessageEvent event) {
 
     }
 
@@ -127,21 +129,45 @@ public abstract class BaseActivity<T extends AbsPresenter> extends SupportActivi
 
     @Override
     public void setVisible(View... views) {
-
+        for(View v:views){
+            v.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override
     public void setInVisible(View... views) {
-
+        for(View v:views){
+            v.setVisibility(View.INVISIBLE);
+        }
     }
 
     @Override
     public void setGone(View... views) {
-
+        for(View view:views){
+            view.setVisibility(View.GONE);
+        }
     }
 
+    /**
+     * 获得网络变化后的类型
+     */
     @Override
     public void onNetChange(int netMobile) {
+        this.mNetMobile=netMobile;
+        isNetwork=isNetConnect();
+    }
 
+    /**
+     * 根据返回的网络类型，判断是否有网络
+     */
+    private boolean isNetConnect() {
+        if(mNetMobile==NetUtils.NETWORK_MOBILE){
+            return true;
+        }else if(mNetMobile==NetUtils.NETWORK_WIFI){
+            return true;
+        }else if(mNetMobile==NetUtils.NETWORK_NONE){
+            return false;
+        }
+        return false;
     }
 }

@@ -1,3 +1,5 @@
 <resources>
-    <string name="app_name">WanAndroidApp</string>
+    <string name="app_name">玩Android</string>
+    <!-- splash -->
+    <string name="splash_skip">跳过</string>
 </resources>

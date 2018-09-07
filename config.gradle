@@ -23,6 +23,12 @@ ext {
             butterknifeVersion     : "8.4.0",
             //EventBus
             eventBusVersion        : "3.1.1",
+            //Glide
+            glideVersion           : "4.8.0",
+            //RxJava
+            rxjavaVersion          : "2.2.2",
+            rxandroidVersion       : "2.1.0",
+
 
     ]
 
@@ -46,7 +52,15 @@ ext {
             "butterknife-compiler": "com.jakewharton:butterknife-compiler:${version["butterknifeVersion"]}",
 
             //EventBus
-            "eventBus":"org.greenrobot:eventbus:${version["eventBusVersion"]}",
+            "eventBus"            : "org.greenrobot:eventbus:${version["eventBusVersion"]}",
+
+            //Glide
+            "glide"               : "com.github.bumptech.glide:glide:${version["glideVersion"]}",
+            "glide-compiler"      : "com.github.bumptech.glide:compiler:${version["glideVersion"]}",
+
+            //RxJava
+            "rxjava"              : "io.reactivex.rxjava2:rxjava:${version["rxjavaVersion"]}",
+            "rxandroid"           : "io.reactivex.rxjava2:rxandroid:${version["rxandroidVersion"]}",
 
     ]
 

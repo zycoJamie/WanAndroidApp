@@ -6,6 +6,7 @@ public interface AbstractView {
     void showNormal();
     void showError();
     void showLoading();
+    void showEmpty();
     void reload();
     void setVisible(View... views);
     void setInVisible(View... views);

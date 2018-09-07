@@ -123,6 +123,11 @@ public abstract class BaseActivity<T extends AbsPresenter> extends SupportActivi
     }
 
     @Override
+    public void showEmpty() {
+
+    }
+
+    @Override
     public void reload() {
 
     }

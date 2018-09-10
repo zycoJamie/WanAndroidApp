@@ -32,8 +32,8 @@ ext {
             //RxJava
             rxjavaVersion          : "2.2.2",
             rxandroidVersion       : "2.1.0",
-
-
+            //ByeBurger
+            byeburgerVersion       : "1.2.3",
     ]
 
     dependencies = [
@@ -69,6 +69,8 @@ ext {
             //RxJava
             "rxjava"              : "io.reactivex.rxjava2:rxjava:${version["rxjavaVersion"]}",
             "rxandroid"           : "io.reactivex.rxjava2:rxandroid:${version["rxandroidVersion"]}",
+            //ByeBurger
+            "byeburger":"com.github.githubwing:ByeBurger:${version["byeburgerVersion"]}",
 
     ]
 

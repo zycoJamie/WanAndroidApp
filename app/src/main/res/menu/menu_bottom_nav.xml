@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/tab_main"
+        android:enabled="true"
+        android:icon="@mipmap/icon_main_not_selected"
+        android:title="@string/bottom_nav_main"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/tab_knowledge_hierarchy"
+        android:enabled="true"
+        android:icon="@mipmap/icon_knowledge_hierarchy_not_selected"
+        android:title="@string/bottom_nav_hierarchy"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/tab_project"
+        android:enabled="true"
+        android:icon="@mipmap/icon_project_not_selected"
+        android:title="@string/bottom_nav_project"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/tab_mine"
+        android:enabled="true"
+        android:icon="@mipmap/icon_mine_not_selected"
+        android:title="@string/bottom_nav_mine"
+        app:showAsAction="always" />
+</menu>

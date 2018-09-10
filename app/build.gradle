@@ -42,4 +42,5 @@ dependencies {
     implementation rootProject.ext.dependencies["rxjava"]
     implementation rootProject.ext.dependencies["rxandroid"]
     implementation rootProject.ext.dependencies["shapeLoadingView"]
+    implementation rootProject.ext.dependencies["byeburger"]
 }

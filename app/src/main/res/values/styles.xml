@@ -15,7 +15,7 @@
         <item name="android:background">@color/transparent</item>
         <item name="android:textColor">@color/black_255</item>
         <item name="android:windowBackground">@color/white_255</item>
-        <item name="android:itemBackground">@color/wechat_color</item>
+        <item name="android:itemBackground">@color/white_255</item>
         <!-- 取消启动APP时的白屏 -->
         <item name="android:windowDisablePreview">true</item>
     </style>

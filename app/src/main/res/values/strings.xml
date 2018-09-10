@@ -2,4 +2,11 @@
     <string name="app_name">玩Android</string>
     <!-- splash -->
     <string name="splash_skip">跳过</string>
+    <!-- loading -->
+    <string name="loading_text">加载中...</string>
+    <!-- error-->
+    <string name="error_hint">加载失败，请重试</string>
+    <string name="error_button_text">加载失败，请重试</string>
+    <!-- empty -->
+    <string name="empty_hint">暂时还没有数据呀</string>
 </resources>

@@ -39,6 +39,7 @@ ext {
     dependencies = [
             "appcompat-v7"        : "com.android.support:appcompat-v7:${version["supportLibraryVersion"]}",
             "constraint-layout"   : "com.android.support.constraint:constraint-layout:${version["constraintLayoutVersion"]}",
+            "design"              : "com.android.support:design:${version["supportLibraryVersion"]}",
             "junit"               : "junit:junit:${version["junitVersion"]}",
             "runner"              : "com.android.support.test:runner:${version["testRunner"]}",
             "espresso-core"       : "com.android.support.test.espresso:espresso-core:${version["testEspresso"]}",

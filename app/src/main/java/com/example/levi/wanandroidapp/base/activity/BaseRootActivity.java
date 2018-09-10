@@ -11,12 +11,12 @@ import com.example.levi.wanandroidapp.base.presenter.AbsPresenter;
  * on 2018/9/7
  */
 public abstract class BaseRootActivity<T extends AbsPresenter> extends BaseActivity<T> {
-    public static final int NORMAL_STATE=0;
-    public static final int LOADING_STATE=1;
-    public static final int ERROR_STATE=2;
-    public static final int EMPTY_STATE=3;
+    public static final int NORMAL_STATE = 0;
+    public static final int LOADING_STATE = 1;
+    public static final int ERROR_STATE = 2;
+    public static final int EMPTY_STATE = 3;
 
-    private int mCurrentState=NORMAL_STATE;
+    private int mCurrentState = NORMAL_STATE;
     private View mErrorView;
     private View mLoadingView;
     private View mEmptyView;
@@ -25,38 +25,92 @@ public abstract class BaseRootActivity<T extends AbsPresenter> extends BaseActiv
 
     @Override
     protected void initUI() {
-        if(mActivity==null){
+        if (mActivity == null) {
             return;
         }
         /*mNormalView=findViewById(R.id.normal_view);*/
-        if(mNormalView==null){
+        if (mNormalView == null) {
             throw new IllegalStateException("the subclass of BaseRootActivity need a View of \"normal_view\" ");
         }
-        if(!(mNormalView.getParent() instanceof ViewGroup)){
+        if (!(mNormalView.getParent() instanceof ViewGroup)) {
             throw new IllegalStateException("\"normal_view\" must inherit ViewGroup");
         }
-        ViewGroup parent= (ViewGroup) mNormalView.getParent();
-
-
+        ViewGroup parent = (ViewGroup) mNormalView.getParent();
+        View.inflate(mActivity, R.layout.view_loading, parent);
+        View.inflate(mActivity, R.layout.view_error, parent);
+        View.inflate(mActivity, R.layout.view_empty, parent);
+        mLoadingView=parent.findViewById(R.id.rl_loading_view);
+        mErrorView=parent.findViewById(R.id.rl_error_view);
+        mEmptyView=parent.findViewById(R.id.rl_empty_view);
+        mErrorView.setOnClickListener(v -> reload());
+        mErrorView.setVisibility(View.GONE);
+        mEmptyView.setVisibility(View.GONE);
+        mLoadingView.setVisibility(View.GONE);
+        mNormalView.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void showNormal() {
-        super.showNormal();
+        if(mCurrentState==NORMAL_STATE){
+            return;
+        }
+        hideCurrentView();
+        mNormalView.setVisibility(View.VISIBLE);
+        mCurrentState=NORMAL_STATE;
     }
 
     @Override
     public void showError() {
-        super.showError();
+        if(mCurrentState==ERROR_STATE){
+            return;
+        }
+        hideCurrentView();
+        mErrorView.setVisibility(View.VISIBLE);
+        mCurrentState=ERROR_STATE;
     }
 
     @Override
     public void showLoading() {
-        super.showLoading();
+        if(mCurrentState==LOADING_STATE){
+            return;
+        }
+        hideCurrentView();
+        mLoadingView.setVisibility(View.VISIBLE);
+        mCurrentState=LOADING_STATE;
+    }
+
+    protected void hideCurrentView(){
+        switch(mCurrentState){
+            case  NORMAL_STATE:{
+                if(mNormalView==null){
+                    return;
+                }
+                mNormalView.setVisibility(View.GONE);
+                break;
+            }
+            case LOADING_STATE:{
+                mLoadingView.setVisibility(View.GONE);
+                break;
+            }
+            case ERROR_STATE:{
+                mErrorView.setVisibility(View.GONE);
+                break;
+            }
+            case EMPTY_STATE:{
+                mEmptyView.setVisibility(View.GONE);
+                break;
+            }
+            default:break;
+        }
     }
 
     @Override
     public void showEmpty() {
-        super.showEmpty();
+        if(mCurrentState==EMPTY_STATE){
+            return;
+        }
+        hideCurrentView();
+        mEmptyView.setVisibility(View.VISIBLE);
+        mCurrentState=EMPTY_STATE;
     }
 }

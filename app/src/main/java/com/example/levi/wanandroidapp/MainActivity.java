@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.example.levi.wanandroidapp.base.activity.BaseRootActivity;
 import com.example.levi.wanandroidapp.base.presenter.AbsPresenter;
+import com.example.levi.wanandroidapp.base.presenter.BasePresenter;
 
 import butterknife.BindView;
 
@@ -31,7 +32,7 @@ public class MainActivity extends BaseRootActivity implements NavigationView.OnN
 
     private ImageView mAvatarIv;
     private TextView mNameTv;
-    private AbsPresenter mPresenter;
+    private BasePresenter mPresenter;
 
     @Override
     protected void initData() {
@@ -43,6 +44,11 @@ public class MainActivity extends BaseRootActivity implements NavigationView.OnN
         View headerView=mLeftNav.inflateHeaderView(R.layout.nav_header_view);
         mAvatarIv=headerView.findViewById(R.id.iv_avatar);
         mNameTv=headerView.findViewById(R.id.tv_name);
+        mPresenter=new BasePresenter();
+        initFragment();
+    }
+
+    private void initFragment() {
 
     }
 

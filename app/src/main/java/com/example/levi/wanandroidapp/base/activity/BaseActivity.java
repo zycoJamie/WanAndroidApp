@@ -57,7 +57,7 @@ public abstract class BaseActivity<T extends AbsPresenter> extends SupportActivi
 
     }
 
-    private void initToolbar() {
+    protected void initToolbar() {
 
     }
 

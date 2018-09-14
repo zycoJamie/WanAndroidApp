@@ -1,36 +1,31 @@
-package com.example.levi.wanandroidapp.base.activity;
+package com.example.levi.wanandroidapp.base.fragment;
 
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.levi.wanandroidapp.R;
-import com.example.levi.wanandroidapp.base.presenter.AbsPresenter;
+import com.example.levi.wanandroidapp.base.presenter.BasePresenter;
 
-/**
- * Created by zyco
- * on 2018/9/7
- */
-public abstract class BaseRootActivity<T extends AbsPresenter> extends BaseActivity<T> {
+public abstract class BaseRootFragment<T extends BasePresenter> extends BaseFragment {
     public static final int NORMAL_STATE = 0;
     public static final int LOADING_STATE = 1;
     public static final int ERROR_STATE = 2;
     public static final int EMPTY_STATE = 3;
 
-    private int mCurrentState = NORMAL_STATE;
     private View mErrorView;
     private View mLoadingView;
     private View mEmptyView;
     private ViewGroup mNormalView;
-
+    private int mCurrentState = NORMAL_STATE;
 
     @Override
     protected void initUI() {
-        if (mActivity == null) {
+        if (getView() == null) {
             return;
         }
-        /*mNormalView=findViewById(R.id.normal_view);*/
+        /*mNormalView=getView().findViewById(R.id.normal_view);*/
         if (mNormalView == null) {
-            throw new IllegalStateException("the subclass of BaseRootActivity need a View of \"normal_view\" ");
+            throw new IllegalStateException("the subclass of BaseRootFragment need a View of \"normal_view\"");
         }
         if (!(mNormalView.getParent() instanceof ViewGroup)) {
             throw new IllegalStateException("\"normal_view\" must inherit ViewGroup");
@@ -43,9 +38,9 @@ public abstract class BaseRootActivity<T extends AbsPresenter> extends BaseActiv
         mErrorView = parent.findViewById(R.id.rl_error_view);
         mEmptyView = parent.findViewById(R.id.rl_empty_view);
         mErrorView.setOnClickListener(v -> reload());
+        mLoadingView.setVisibility(View.GONE);
         mErrorView.setVisibility(View.GONE);
         mEmptyView.setVisibility(View.GONE);
-        mLoadingView.setVisibility(View.GONE);
         mNormalView.setVisibility(View.VISIBLE);
     }
 

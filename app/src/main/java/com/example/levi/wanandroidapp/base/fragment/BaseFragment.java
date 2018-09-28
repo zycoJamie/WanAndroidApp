@@ -35,7 +35,7 @@ public abstract class BaseFragment<T extends AbsPresenter> extends SupportFragme
     private int mNetMobile;
     private boolean isNetwork;
 
-    @Inject
+    /*@Inject*/
     protected T mPresenter;
 
     @Override

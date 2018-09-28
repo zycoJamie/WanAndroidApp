@@ -33,7 +33,7 @@ public abstract class BaseActivity<T extends AbsPresenter> extends SupportActivi
     private boolean isNetwork;
     public static NetworkBroadcastReceiver.NetEvent gEventActivity;
 
-    @Inject
+    /*@Inject*/
     protected T mPresenter;
 
     @Override

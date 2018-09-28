@@ -26,7 +26,7 @@ import butterknife.ButterKnife;
 import me.yokeyword.fragmentation.SupportActivity;
 
 public abstract class BaseActivity<T extends AbsPresenter> extends SupportActivity implements AbstractView, NetworkBroadcastReceiver.NetEvent {
-    protected MyApplication mCcontext;
+    protected MyApplication mContext;
     protected BaseActivity mActivity;
     protected ActivityComponent mActivityComponent;
     private int mNetMobile;
@@ -40,7 +40,7 @@ public abstract class BaseActivity<T extends AbsPresenter> extends SupportActivi
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(getLayoutId());
-        mCcontext = MyApplication.getInstance();
+        mContext = MyApplication.getInstance();
         mActivity = this;
         gEventActivity = this;
         initActivityComponent();
@@ -62,11 +62,6 @@ public abstract class BaseActivity<T extends AbsPresenter> extends SupportActivi
     }
 
     /**
-     * 初始化数据
-     */
-    protected abstract void initData();
-
-    /**
      * 初始化UI
      */
     protected abstract void initUI();
@@ -79,16 +74,21 @@ public abstract class BaseActivity<T extends AbsPresenter> extends SupportActivi
     }
 
     /**
+     * 获取布局id
+     */
+    protected abstract int getLayoutId();
+
+    /**
+     * 初始化数据
+     */
+    protected abstract void initData();
+
+    /**
      * dagger初始化
      */
     protected void initInject() {
 
     }
-
-    /**
-     * 获取布局id
-     */
-    protected abstract int getLayoutId();
 
     private void initActivityComponent() {
         mActivityComponent = DaggerActivityComponent.builder()

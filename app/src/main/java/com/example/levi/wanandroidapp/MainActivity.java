@@ -18,16 +18,19 @@ import android.widget.TextView;
 import com.example.levi.wanandroidapp.base.activity.BaseRootActivity;
 import com.example.levi.wanandroidapp.base.presenter.AbsPresenter;
 import com.example.levi.wanandroidapp.base.presenter.BasePresenter;
+import com.example.levi.wanandroidapp.model.constant.Constant;
 import com.example.levi.wanandroidapp.ui.drawer.VideoActivity;
 import com.example.levi.wanandroidapp.ui.main.fragment.HomePageFragment;
+import com.example.levi.wanandroidapp.util.app.SharedPreferenceUtil;
 import com.example.levi.wanandroidapp.util.app.SkipUtil;
+import com.example.levi.wanandroidapp.util.glide.GlideUtil;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 
-public class MainActivity extends BaseRootActivity implements NavigationView.OnNavigationItemSelectedListener{
+public class MainActivity extends BaseRootActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     @BindView(R.id.bnv_view)
     BottomNavigationView mBottomNavigationView;
@@ -53,10 +56,10 @@ public class MainActivity extends BaseRootActivity implements NavigationView.OnN
 
     @Override
     protected void initUI() {
-        View headerView=mLeftNav.inflateHeaderView(R.layout.nav_header_view);
-        mAvatarIv=headerView.findViewById(R.id.iv_avatar);
-        mNameTv=headerView.findViewById(R.id.tv_name);
-        mPresenter=new BasePresenter();
+        View headerView = mLeftNav.inflateHeaderView(R.layout.nav_header_view);
+        mAvatarIv = headerView.findViewById(R.id.iv_avatar);
+        mNameTv = headerView.findViewById(R.id.tv_name);
+        mPresenter = new BasePresenter();
         initFragment();
         selectFragment(0);
         mLeftNav.setNavigationItemSelectedListener(this);
@@ -65,31 +68,31 @@ public class MainActivity extends BaseRootActivity implements NavigationView.OnN
     @Override
     protected void initToolbar() {
         setSupportActionBar(mToolbar);
-        if(getSupportActionBar()!=null){
+        if (getSupportActionBar() != null) {
             getSupportActionBar().setHomeButtonEnabled(true);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            ActionBarDrawerToggle toggle=new ActionBarDrawerToggle(MainActivity.this,mDrawerLayout,mToolbar,R.string.drawer_open,R.string.drawer_close);
+            ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(MainActivity.this, mDrawerLayout, mToolbar, R.string.drawer_open, R.string.drawer_close);
             toggle.syncState();
             mDrawerLayout.addDrawerListener(toggle);
         }
     }
 
     private void selectFragment(int position) {
-        FragmentTransaction transaction=getSupportFragmentManager().beginTransaction();
-        Fragment currentFragment=mFragments.get(position);
-        Fragment lastFragment=mFragments.get(mLastIndex);
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        Fragment currentFragment = mFragments.get(position);
+        Fragment lastFragment = mFragments.get(mLastIndex);
         transaction.hide(lastFragment);
-        if(!currentFragment.isAdded()){
-            transaction.add(R.id.frame_layout,currentFragment);
+        if (!currentFragment.isAdded()) {
+            transaction.add(R.id.frame_layout, currentFragment);
         }
         transaction.show(currentFragment);
         transaction.commitAllowingStateLoss();
-        mLastIndex=position;
+        mLastIndex = position;
         mPresenter.setCurrentPage(position);
     }
 
     private void initFragment() {
-        mFragments=new ArrayList<>();
+        mFragments = new ArrayList<>();
         mFragments.add(HomePageFragment.getInstance());
     }
 
@@ -98,21 +101,25 @@ public class MainActivity extends BaseRootActivity implements NavigationView.OnN
         return R.layout.activity_main;
     }
 
+    @SuppressWarnings("all")
     private void initNavigationHeader() {
-
+        mNameTv.setText((Boolean) (SharedPreferenceUtil.get(mActivity, Constant.ISLOGIN, false)) ?
+                (String) SharedPreferenceUtil.get(mActivity, Constant.USERNAME, "") : getString(R.string.drawer_login));
+        GlideUtil.loadCircleImage(mActivity,R.mipmap.user_avatar,mAvatarIv);
     }
 
     /**
      * 左侧抽屉菜单的子项单击事件
+     *
      * @param item
      * @return
      */
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        switch(item.getItemId()){
-            case R.id.nav_item_video:{
+        switch (item.getItemId()) {
+            case R.id.nav_item_video: {
                 mDrawerLayout.closeDrawer(Gravity.START);
-                mDrawerLayout.postDelayed(() -> SkipUtil.overlay(mActivity, VideoActivity.class),400);
+                mDrawerLayout.postDelayed(() -> SkipUtil.overlay(mActivity, VideoActivity.class), 400);
                 break;
             }
         }

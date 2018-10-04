@@ -31,6 +31,7 @@ public class ApiStore {
                     Request request=original.newBuilder().build();
                     return chain.proceed(request);
                 })
-                .addInterceptor(new BaseUrlInterceptor());
+                .addInterceptor(new BaseUrlInterceptor())
+                .addInterceptor(new HttpLoggingInterceptor());
     }
 }

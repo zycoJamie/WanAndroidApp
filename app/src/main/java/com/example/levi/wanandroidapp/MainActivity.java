@@ -10,6 +10,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -26,6 +27,7 @@ import com.example.levi.wanandroidapp.ui.main.fragment.HomePageFragment;
 import com.example.levi.wanandroidapp.util.app.BottomNavigationHelper;
 import com.example.levi.wanandroidapp.util.app.SharedPreferenceUtil;
 import com.example.levi.wanandroidapp.util.app.SkipUtil;
+import com.example.levi.wanandroidapp.util.app.ToastUtil;
 import com.example.levi.wanandroidapp.util.glide.GlideUtil;
 
 import org.greenrobot.eventbus.EventBus;
@@ -54,6 +56,7 @@ public class MainActivity extends BaseRootActivity implements NavigationView.OnN
     private BasePresenter mPresenter;
     private List<Fragment> mFragments;
     private int mLastIndex; //上一个fragment的index
+    private long mExitTime;
 
     @Override
     protected void initData() {
@@ -68,7 +71,7 @@ public class MainActivity extends BaseRootActivity implements NavigationView.OnN
         mNameTv = headerView.findViewById(R.id.tv_name);
         mPresenter = new BasePresenter();
         initFragment();
-        /*selectFragment(0);*/
+        selectFragment(0);
         mLeftNav.setNavigationItemSelectedListener(this);
     }
 
@@ -201,20 +204,52 @@ public class MainActivity extends BaseRootActivity implements NavigationView.OnN
 
     /**
      * 处理登陆、登出事件
+     *
      * @param event
      */
     @Override
-    public void onMessageEvent(MessageEvent event){
+    public void onMessageEvent(MessageEvent event) {
         super.onMessageEvent(event);
-        switch(event.getCode()){
-            case EventConstant.LOGIN_SUCCESS:{
+        switch (event.getCode()) {
+            case EventConstant.LOGIN_SUCCESS: {
 
             }
-            case EventConstant.LOGIN_OUT_SUCCESS:{
+            case EventConstant.LOGIN_OUT_SUCCESS: {
                 initNavigationHeader();
                 break;
             }
         }
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_main_hot: {
+                // TODO: 2018/10/4 menu function
+                break;
+            }
+            case R.id.menu_main_search: {
+
+                break;
+            }
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressedSupport() {
+        if ((System.currentTimeMillis() - mExitTime) > 2000) {
+            ToastUtil.show(mActivity, getString(R.string.exit_app));
+            mExitTime = System.currentTimeMillis();
+        } else {
+            SharedPreferenceUtil.put(mActivity, Constant.ISLOGIN, false);
+            finish();
+        }
+    }
 }

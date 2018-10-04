@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/menu_main_hot"
+        android:enabled="true"
+        android:icon="@drawable/ic_action_hot"
+        android:title="@string/menu_hot"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/menu_main_search"
+        android:enabled="true"
+        android:icon="@drawable/ic_action_search"
+        android:title="@string/menu_search"
+        app:showAsAction="always" />
+
+</menu>

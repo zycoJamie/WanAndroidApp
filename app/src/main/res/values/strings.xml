@@ -18,4 +18,7 @@
     <string name="drawer_open">打开侧滑菜单</string>
     <string name="drawer_close">关闭侧滑菜单</string>
     <string name="drawer_login">点击头像登录</string>
+    <string name="menu_hot">热词</string>
+    <string name="menu_search">搜索</string>
+    <string name="exit_app">想要退出?请再次点击鸭</string>
 </resources>

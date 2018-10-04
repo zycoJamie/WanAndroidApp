@@ -1,5 +1,6 @@
 package com.example.levi.wanandroidapp.ui.main.fragment;
 
+import com.example.levi.wanandroidapp.R;
 import com.example.levi.wanandroidapp.base.fragment.BaseRootFragment;
 
 public class HomePageFragment extends BaseRootFragment {
@@ -15,6 +16,8 @@ public class HomePageFragment extends BaseRootFragment {
 
     @Override
     public int getLayoutResID() {
-        return 0;
+        return R.layout.fragment_homepage;
     }
+
+
 }

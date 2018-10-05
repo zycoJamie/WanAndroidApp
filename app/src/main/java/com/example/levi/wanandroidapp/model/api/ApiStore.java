@@ -1,14 +1,10 @@
 package com.example.levi.wanandroidapp.model.api;
 
+import com.example.levi.wanandroidapp.model.cookie.CookiesManager;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-
-import java.io.IOException;
-
-import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
-import okhttp3.Response;
 import retrofit2.Retrofit;
 
 /**
@@ -32,6 +28,7 @@ public class ApiStore {
                     return chain.proceed(request);
                 })
                 .addInterceptor(new BaseUrlInterceptor())
-                .addInterceptor(new HttpLoggingInterceptor());
+                .addInterceptor(new HttpLoggingInterceptor())
+                .cookieJar(new CookiesManager());
     }
 }

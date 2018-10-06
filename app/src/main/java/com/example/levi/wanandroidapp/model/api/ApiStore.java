@@ -6,6 +6,8 @@ import com.google.gson.GsonBuilder;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * Author: Levi
@@ -30,5 +32,15 @@ public class ApiStore {
                 .addInterceptor(new BaseUrlInterceptor())
                 .addInterceptor(new HttpLoggingInterceptor())
                 .cookieJar(new CookiesManager());
+        sRetrofit=new Retrofit.Builder()
+                .baseUrl(sBaseUrl)
+                .addConverterFactory(GsonConverterFactory.create(gson))
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .client(builder.build())
+                .build();
+    }
+
+    public static <T> T createApi(Class<T> serviceClass){
+        return sRetrofit.create(serviceClass);
     }
 }

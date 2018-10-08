@@ -10,10 +10,16 @@ import com.example.levi.wanandroidapp.contract.main.HomePageContract;
 import com.example.levi.wanandroidapp.data.login.UserInfo;
 import com.example.levi.wanandroidapp.data.main.BannerBean;
 import com.example.levi.wanandroidapp.data.main.HomePageArticleBean;
+import com.example.levi.wanandroidapp.model.constant.Constant;
 import com.example.levi.wanandroidapp.presenter.main.HomePagePresenter;
+import com.example.levi.wanandroidapp.util.app.SharedPreferenceUtil;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.youth.banner.Banner;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -27,6 +33,11 @@ public class HomePageFragment extends BaseRootFragment<HomePagePresenter> implem
 
     private Banner mBanner;
     private LinearLayout mBannerLl;
+    private List<HomePageArticleBean.DatasBean> mArticleList;
+    private List<String> mLinkList;
+    private List<String> mImageList;
+    private List<String> mTitleList;
+
 
 
     public static HomePageFragment getInstance() {
@@ -51,7 +62,32 @@ public class HomePageFragment extends BaseRootFragment<HomePagePresenter> implem
 
     @Override
     protected void initData() {
+        setRefresh();
+        mArticleList=new ArrayList<>();
+        mLinkList=new ArrayList<>();
+        mImageList=new ArrayList<>();
+        mTitleList=new ArrayList<>();
+        if(Constant.DEFAULT.equals(SharedPreferenceUtil.get(mActivity, Constant.USERNAME,Constant.DEFAULT))){
+            mPresenter.getBanner();
+            mPresenter.getHomepageList(0);
+        }else{
+            mPresenter.loginAndLoad();
+        }
 
+    }
+
+    /**
+     * 下拉刷新和上拉加载更多的回调监听
+     */
+    private void setRefresh() {
+        mRefreshSrl.setOnRefreshListener(refreshLayout -> {
+            mPresenter.autoRefresh();
+            refreshLayout.finishRefresh(1000);
+        });
+        mRefreshSrl.setOnLoadMoreListener(refreshLayout -> {
+            mPresenter.loadMore();
+            refreshLayout.finishLoadMore(1000);
+        });
     }
 
     @Override

@@ -41,4 +41,21 @@ public interface ApiService {
     @POST("user/login")
     @FormUrlEncoded
     Observable<BaseResponse<UserInfo>> login(@Field("username") String username,@Field("password")String password);
+
+    /**
+     * 收藏文章
+     */
+    @Headers({"baseUrl:normal"})
+    @POST("lg/collect/{id}/json")
+    Observable<BaseResponse> collectArticle(@Path("id") int id);
+
+    /**
+     * 取消收藏的文章
+     * @param id 主页文章列表中，文章的id
+     */
+    @Headers({"baseUrl:normal"})
+    @POST("lg/uncollect_originId/{id}/json")
+    Observable<BaseResponse> cancleCollectArticle(@Path("id") int id);
+
+
 }

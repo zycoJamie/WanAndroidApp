@@ -6,7 +6,7 @@ import android.view.ViewGroup;
 import com.example.levi.wanandroidapp.R;
 import com.example.levi.wanandroidapp.base.presenter.BasePresenter;
 
-public abstract class BaseRootFragment<T extends BasePresenter> extends BaseFragment {
+public abstract class BaseRootFragment<T extends BasePresenter> extends BaseFragment<T> {
     public static final int NORMAL_STATE = 0;
     public static final int LOADING_STATE = 1;
     public static final int ERROR_STATE = 2;
@@ -23,7 +23,7 @@ public abstract class BaseRootFragment<T extends BasePresenter> extends BaseFrag
         if (getView() == null) {
             return;
         }
-        /*mNormalView=getView().findViewById(R.id.normal_view);*/
+        mNormalView=getView().findViewById(R.id.normal_view);
         if (mNormalView == null) {
             throw new IllegalStateException("the subclass of BaseRootFragment need a View of \"normal_view\"");
         }

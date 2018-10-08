@@ -10,6 +10,7 @@ import com.example.levi.wanandroidapp.model.api.ApiService;
 import com.example.levi.wanandroidapp.model.api.ApiStore;
 import com.example.levi.wanandroidapp.model.api.BaseResponse;
 import com.example.levi.wanandroidapp.model.constant.Constant;
+import com.example.levi.wanandroidapp.util.app.LogUtil;
 import com.example.levi.wanandroidapp.util.app.SharedPreferenceUtil;
 import com.example.levi.wanandroidapp.util.network.RxUtil;
 
@@ -20,18 +21,14 @@ import java.util.Map;
 import javax.inject.Inject;
 
 import io.reactivex.Observable;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.functions.Action;
-import io.reactivex.functions.BiFunction;
-import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function3;
-import io.reactivex.schedulers.Schedulers;
 
 /**
  * Author: Levi
  * CreateDate: 2018/10/4 15:09
  */
 public class HomePagePresenter extends BasePresenter<HomePageContract.IView> implements HomePageContract.Presenter {
+    private static final String TAG = HomePagePresenter.class.getSimpleName();
     private boolean isRefresh = true;
     private int currentPage;
 
@@ -66,8 +63,7 @@ public class HomePagePresenter extends BasePresenter<HomePageContract.IView> imp
         mCompositeDisposable.add(
                 ApiStore.createApi(ApiService.class)
                         .getArticleList(page)
-                        .subscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread())
+                        .compose(RxUtil.rxSchedulerHelper())
                         .subscribe(homePageArticleBeanBaseResponse -> {
                             if (homePageArticleBeanBaseResponse.getErrorCode() == Constant.REQUEST_SUCCESS) {
                                 mView.getHomepageListOk(homePageArticleBeanBaseResponse.getData(), isRefresh);
@@ -82,8 +78,7 @@ public class HomePagePresenter extends BasePresenter<HomePageContract.IView> imp
         mCompositeDisposable.add(
                 ApiStore.createApi(ApiService.class)
                         .getBanner()
-                        .subscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread())
+                        .compose(RxUtil.rxSchedulerHelper())
                         .subscribe(listBaseResponse -> {
                             if (listBaseResponse.getErrorCode() == Constant.REQUEST_SUCCESS) {
                                 mView.getBannerOk(listBaseResponse.getData());
@@ -148,11 +143,40 @@ public class HomePagePresenter extends BasePresenter<HomePageContract.IView> imp
 
     @Override
     public void collectArticle(int id) {
+        mCompositeDisposable.add(
+                ApiStore.createApi(ApiService.class)
+                        .collectArticle(id)
+                        .compose(RxUtil.rxSchedulerHelper())
+                        .subscribe(baseResponse -> {
+                            if (baseResponse.getErrorCode() == Constant.REQUEST_SUCCESS) {
+                                if (baseResponse.getData() != null) {
+                                    LogUtil.i(TAG, (String) baseResponse.getData());
+                                    mView.collectArticleOK((String) baseResponse.getData());
+                                } else {
+                                    mView.collectArticleErr(baseResponse.getErrorMsg());
+                                }
+                            }
+                        }, throwable -> mView.collectArticleErr(throwable.getMessage()))
+        );
 
     }
 
     @Override
     public void cancelCollectArticle(int id) {
-
+        mCompositeDisposable.add(
+                ApiStore.createApi(ApiService.class)
+                        .cancleCollectArticle(id)
+                        .compose(RxUtil.rxSchedulerHelper())
+                        .subscribe(baseResponse -> {
+                            if (baseResponse.getErrorCode() == Constant.REQUEST_SUCCESS) {
+                                if (baseResponse.getData() != null) {
+                                    LogUtil.i(TAG, (String) baseResponse.getData());
+                                    mView.cancelCollectArticleOK((String) baseResponse.getData());
+                                } else {
+                                    mView.cancelCollectArticleErr(baseResponse.getErrorMsg());
+                                }
+                            }
+                        }, throwable -> mView.cancelCollectArticleErr(throwable.getMessage()))
+        );
     }
 }

@@ -16,6 +16,10 @@ public class Constant {
     public static final String ARTICLE_LINK = "article_link";
     public static final String ARTICLE_ID = "article_id";
     public static final String ARTICLE_IS_COLLECT = "article_is_collect";
+    public static final String HOMEPAGE_TAG = "homepage_tag";
+    public static final String HOMEPAGE_CID = "homepage_cid";
+    public static final String HOMEPAGE_CNAME = "homepage_c_name";
+    public static final String HOMEPAGE_SUPER_CNAME = "homepage_super_name";
 
     /**
      * user information

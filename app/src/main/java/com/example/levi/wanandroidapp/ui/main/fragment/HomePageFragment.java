@@ -17,13 +17,14 @@ import com.example.levi.wanandroidapp.data.main.BannerBean;
 import com.example.levi.wanandroidapp.data.main.HomePageArticleBean;
 import com.example.levi.wanandroidapp.model.constant.Constant;
 import com.example.levi.wanandroidapp.presenter.main.HomePagePresenter;
+import com.example.levi.wanandroidapp.ui.knowledge.activity.KnowledgeClassifyActivity;
+import com.example.levi.wanandroidapp.ui.login.LoginActivity;
 import com.example.levi.wanandroidapp.ui.main.activity.AriticleDetailsActivity;
 import com.example.levi.wanandroidapp.ui.main.adapter.HomePageAdapter;
 import com.example.levi.wanandroidapp.util.app.SharedPreferenceUtil;
+import com.example.levi.wanandroidapp.util.app.SkipUtil;
+import com.example.levi.wanandroidapp.util.app.ToastUtil;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
-import com.scwang.smartrefresh.layout.api.RefreshLayout;
-import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
-import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.youth.banner.Banner;
 
 import java.util.ArrayList;
@@ -48,7 +49,6 @@ public class HomePageFragment extends BaseRootFragment<HomePagePresenter> implem
     private int mClickPosition;
 
 
-
     public static HomePageFragment getInstance() {
         return new HomePageFragment();
     }
@@ -63,8 +63,8 @@ public class HomePageFragment extends BaseRootFragment<HomePagePresenter> implem
         super.initUI();
         showLoading();
         mListRv.setLayoutManager(new LinearLayoutManager(mContext));
-        mBannerLl= (LinearLayout) getLayoutInflater().inflate(R.layout.view_banner,null);
-        mBanner=mBannerLl.findViewById(R.id.banner);
+        mBannerLl = (LinearLayout) getLayoutInflater().inflate(R.layout.view_banner, null);
+        mBanner = mBannerLl.findViewById(R.id.banner);
         mBannerLl.removeView(mBanner);
         mBannerLl.addView(mBanner);
     }
@@ -72,17 +72,17 @@ public class HomePageFragment extends BaseRootFragment<HomePagePresenter> implem
     @Override
     protected void initData() {
         setRefresh();
-        mArticleList=new ArrayList<>();
-        mLinkList=new ArrayList<>();
-        mImageList=new ArrayList<>();
-        mTitleList=new ArrayList<>();
-        if(Constant.DEFAULT.equals(SharedPreferenceUtil.get(mActivity, Constant.USERNAME,Constant.DEFAULT))){
+        mArticleList = new ArrayList<>();
+        mLinkList = new ArrayList<>();
+        mImageList = new ArrayList<>();
+        mTitleList = new ArrayList<>();
+        if (Constant.DEFAULT.equals(SharedPreferenceUtil.get(mActivity, Constant.USERNAME, Constant.DEFAULT))) {
             mPresenter.getBanner();
             mPresenter.getHomepageList(0);
-        }else{
+        } else {
             mPresenter.loginAndLoad();
         }
-        mAdapter=new HomePageAdapter(R.layout.item_homepage,mArticleList);
+        mAdapter = new HomePageAdapter(R.layout.item_homepage, mArticleList);
         mAdapter.addHeaderView(mBannerLl);
         mAdapter.setOnItemClickListener(HomePageFragment.this);
         mAdapter.setOnItemChildClickListener(HomePageFragment.this);
@@ -161,24 +161,47 @@ public class HomePageFragment extends BaseRootFragment<HomePagePresenter> implem
 
     @Override
     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-        Bundle bundle=new Bundle();
-        bundle.putString(Constant.ARTICLE_TITLE,mAdapter.getData().get(position).getTitle());
-        bundle.putString(Constant.ARTICLE_LINK,mAdapter.getData().get(position).getLink());
-        bundle.putBoolean(Constant.ARTICLE_IS_COLLECT,mAdapter.getData().get(position).isCollect());
-        bundle.putInt(Constant.ARTICLE_ID,mAdapter.getData().get(position).getId());
-        Intent intent=new Intent(mActivity, AriticleDetailsActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putString(Constant.ARTICLE_TITLE, mAdapter.getData().get(position).getTitle());
+        bundle.putString(Constant.ARTICLE_LINK, mAdapter.getData().get(position).getLink());
+        bundle.putBoolean(Constant.ARTICLE_IS_COLLECT, mAdapter.getData().get(position).isCollect());
+        bundle.putInt(Constant.ARTICLE_ID, mAdapter.getData().get(position).getId());
+        Intent intent = new Intent(mActivity, AriticleDetailsActivity.class);
         intent.putExtras(bundle);
         /*ActivityOptionsCompat optionsCompat=ActivityOptionsCompat.makeSceneTransitionAnimation(mActivity,view,mContext.getString(R.string.share_element_view));
         startActivity(intent,optionsCompat.toBundle());*/
         startActivity(intent);
     }
 
+    @SuppressWarnings("all")
     @Override
     public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
-        mClickPosition=position;
-        switch (view.getId()){
-            case R.id.tv_type:{
-
+        mClickPosition = position;
+        switch (view.getId()) {
+            case R.id.tv_type: {
+                ActivityOptionsCompat optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(mActivity, view, mContext.getString(R.string.share_element_view));
+                Intent intent = new Intent(mActivity, KnowledgeClassifyActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putBoolean(Constant.HOMEPAGE_TAG, true);
+                bundle.putInt(Constant.HOMEPAGE_CID, mAdapter.getData().get(position).getChapterId());
+                bundle.putString(Constant.HOMEPAGE_CNAME, mAdapter.getData().get(position).getChapterName());
+                bundle.putString(Constant.HOMEPAGE_SUPER_CNAME, mAdapter.getData().get(position).getSuperChapterName());
+                intent.putExtras(bundle);
+                /*startActivity(intent,optionsCompat.toBundle());*/
+                startActivity(intent);
+                break;
+            }
+            case R.id.iv_collect: {
+                if ((Boolean) SharedPreferenceUtil.get(mContext, Constant.ISLOGIN, false)) {
+                    if (mAdapter.getData().get(mClickPosition).isCollect()) {
+                        mPresenter.cancelCollectArticle(mAdapter.getData().get(mClickPosition).getId());
+                    } else {
+                        mPresenter.collectArticle(mAdapter.getData().get(mClickPosition).getId());
+                    }
+                } else {
+                    ToastUtil.show(mContext, getString(R.string.please_you_must_login));
+                    SkipUtil.overlay(mActivity, LoginActivity.class);
+                }
                 break;
             }
         }

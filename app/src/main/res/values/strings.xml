@@ -30,4 +30,10 @@
     <string name="collect_cancel_article">取消关注</string>
     <!-- 登录 -->
     <string name="login_success_auto">已经为您自动登录啦 好开森！</string>
+    <string name="login_account_text_hint">请输入用户名</string>
+    <string name="login_pwd_text_hint">请输入密码</string>
+    <string name="login_button_hint">登录鸭</string>
+    <string name="login_register_button_hint">点我注册</string>
+    <!-- 注册 -->
+
 </resources>

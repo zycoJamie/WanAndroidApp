@@ -1,5 +1,8 @@
 package com.example.levi.wanandroidapp.ui.login;
 
+import android.widget.TextView;
+
+import com.example.levi.wanandroidapp.R;
 import com.example.levi.wanandroidapp.base.activity.BaseActivity;
 import com.example.levi.wanandroidapp.contract.login.LoginContract;
 import com.example.levi.wanandroidapp.data.login.UserInfo;
@@ -20,7 +23,7 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements Login
 
     @Override
     protected int getLayoutId() {
-        return 0;
+        return R.layout.activity_login;
     }
 
     @Override

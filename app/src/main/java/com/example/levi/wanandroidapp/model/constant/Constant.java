@@ -12,6 +12,10 @@ public class Constant {
      * String
      */
     public static String NETBROADCAST = "CONNECTIVITY_CHANGE";
+    public static final String ARTICLE_TITLE = "article_title";
+    public static final String ARTICLE_LINK = "article_link";
+    public static final String ARTICLE_ID = "article_id";
+    public static final String ARTICLE_IS_COLLECT = "article_is_collect";
 
     /**
      * user information

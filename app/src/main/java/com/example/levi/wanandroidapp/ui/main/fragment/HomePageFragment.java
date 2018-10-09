@@ -1,9 +1,14 @@
 package com.example.levi.wanandroidapp.ui.main.fragment;
 
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.widget.LinearLayout;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.levi.wanandroidapp.R;
 import com.example.levi.wanandroidapp.base.fragment.BaseRootFragment;
 import com.example.levi.wanandroidapp.contract.main.HomePageContract;
@@ -12,6 +17,8 @@ import com.example.levi.wanandroidapp.data.main.BannerBean;
 import com.example.levi.wanandroidapp.data.main.HomePageArticleBean;
 import com.example.levi.wanandroidapp.model.constant.Constant;
 import com.example.levi.wanandroidapp.presenter.main.HomePagePresenter;
+import com.example.levi.wanandroidapp.ui.main.activity.AriticleDetailsActivity;
+import com.example.levi.wanandroidapp.ui.main.adapter.HomePageAdapter;
 import com.example.levi.wanandroidapp.util.app.SharedPreferenceUtil;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
@@ -24,7 +31,7 @@ import java.util.List;
 
 import butterknife.BindView;
 
-public class HomePageFragment extends BaseRootFragment<HomePagePresenter> implements HomePageContract.IView {
+public class HomePageFragment extends BaseRootFragment<HomePagePresenter> implements HomePageContract.IView, BaseQuickAdapter.OnItemClickListener, BaseQuickAdapter.OnItemChildClickListener {
 
     @BindView(R.id.normal_view)
     SmartRefreshLayout mRefreshSrl;
@@ -37,6 +44,8 @@ public class HomePageFragment extends BaseRootFragment<HomePagePresenter> implem
     private List<String> mLinkList;
     private List<String> mImageList;
     private List<String> mTitleList;
+    private HomePageAdapter mAdapter;
+    private int mClickPosition;
 
 
 
@@ -73,6 +82,10 @@ public class HomePageFragment extends BaseRootFragment<HomePagePresenter> implem
         }else{
             mPresenter.loginAndLoad();
         }
+        mAdapter=new HomePageAdapter(R.layout.item_homepage,mArticleList);
+        mAdapter.addHeaderView(mBannerLl);
+        mAdapter.setOnItemClickListener(HomePageFragment.this);
+        mAdapter.setOnItemChildClickListener(HomePageFragment.this);
 
     }
 
@@ -144,5 +157,30 @@ public class HomePageFragment extends BaseRootFragment<HomePagePresenter> implem
     @Override
     public void cancelCollectArticleErr(String info) {
 
+    }
+
+    @Override
+    public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+        Bundle bundle=new Bundle();
+        bundle.putString(Constant.ARTICLE_TITLE,mAdapter.getData().get(position).getTitle());
+        bundle.putString(Constant.ARTICLE_LINK,mAdapter.getData().get(position).getLink());
+        bundle.putBoolean(Constant.ARTICLE_IS_COLLECT,mAdapter.getData().get(position).isCollect());
+        bundle.putInt(Constant.ARTICLE_ID,mAdapter.getData().get(position).getId());
+        Intent intent=new Intent(mActivity, AriticleDetailsActivity.class);
+        intent.putExtras(bundle);
+        /*ActivityOptionsCompat optionsCompat=ActivityOptionsCompat.makeSceneTransitionAnimation(mActivity,view,mContext.getString(R.string.share_element_view));
+        startActivity(intent,optionsCompat.toBundle());*/
+        startActivity(intent);
+    }
+
+    @Override
+    public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
+        mClickPosition=position;
+        switch (view.getId()){
+            case R.id.tv_type:{
+
+                break;
+            }
+        }
     }
 }

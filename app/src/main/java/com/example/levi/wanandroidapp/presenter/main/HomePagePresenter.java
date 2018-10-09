@@ -66,8 +66,10 @@ public class HomePagePresenter extends BasePresenter<HomePageContract.IView> imp
                         .compose(RxUtil.rxSchedulerHelper())
                         .subscribe(homePageArticleBeanBaseResponse -> {
                             if (homePageArticleBeanBaseResponse.getErrorCode() == Constant.REQUEST_SUCCESS) {
+                                LogUtil.i(TAG,"homepage article success");
                                 mView.getHomepageListOk(homePageArticleBeanBaseResponse.getData(), isRefresh);
                             } else {
+                                LogUtil.i(TAG,"homepage article error");
                                 mView.getHomepageListErr(homePageArticleBeanBaseResponse.getErrorMsg());
                             }
                         }, throwable -> mView.getHomepageListErr(throwable.getMessage())));
@@ -81,8 +83,10 @@ public class HomePagePresenter extends BasePresenter<HomePageContract.IView> imp
                         .compose(RxUtil.rxSchedulerHelper())
                         .subscribe(listBaseResponse -> {
                             if (listBaseResponse.getErrorCode() == Constant.REQUEST_SUCCESS) {
+                                LogUtil.i(TAG,"banner success");
                                 mView.getBannerOk(listBaseResponse.getData());
                             } else {
+                                LogUtil.i(TAG,"banner error");
                                 mView.getBannerErr(listBaseResponse.getErrorMsg());
                             }
                         }, throwable -> mView.getBannerErr(throwable.getMessage())));

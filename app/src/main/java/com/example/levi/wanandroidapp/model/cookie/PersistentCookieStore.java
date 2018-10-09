@@ -12,6 +12,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -98,8 +99,8 @@ public class PersistentCookieStore {
     /**
      * 删除所有的cookie，包括内存和磁盘上的
      */
-    public boolean removeAll(){
-        SharedPreferences.Editor persistent=mCookiePrefs.edit();
+    public boolean removeAll() {
+        SharedPreferences.Editor persistent = mCookiePrefs.edit();
         persistent.clear();
         persistent.apply();
         cookies.clear();
@@ -109,18 +110,18 @@ public class PersistentCookieStore {
     /**
      * 删除指定cookie
      */
-    public boolean remove(HttpUrl url,Cookie cookie){
-        String name=getCookieToken(cookie);
-        if(cookies.containsKey(url.host()) && cookies.get(url.host()).containsKey(name)){
+    public boolean remove(HttpUrl url, Cookie cookie) {
+        String name = getCookieToken(cookie);
+        if (cookies.containsKey(url.host()) && cookies.get(url.host()).containsKey(name)) {
             cookies.get(url.host()).remove(name);
-            SharedPreferences.Editor persistent=mCookiePrefs.edit();
-            persistent.putString(url.host(),TextUtils.join(",",cookies.get(url.host()).keySet()));
-            if(mCookiePrefs.contains(name)){
+            SharedPreferences.Editor persistent = mCookiePrefs.edit();
+            persistent.putString(url.host(), TextUtils.join(",", cookies.get(url.host()).keySet()));
+            if (mCookiePrefs.contains(name)) {
                 persistent.remove(name);
             }
             persistent.apply();
             return true;
-        }else{
+        } else {
             return false;
         }
     }
@@ -128,9 +129,9 @@ public class PersistentCookieStore {
     /**
      * 得到所有的cookie
      */
-    public List<Cookie> getCookies(){
-        ArrayList<Cookie> lists=new ArrayList<>();
-        for(String host:cookies.keySet()){
+    public List<Cookie> getCookies() {
+        ArrayList<Cookie> lists = new ArrayList<>();
+        for (String host : cookies.keySet()) {
             lists.addAll(cookies.get(host).values());
         }
         return lists;
@@ -186,7 +187,7 @@ public class PersistentCookieStore {
      */
     private byte[] hexString2ByteArray(String encodedCookie) {
         byte[] bytes = new byte[encodedCookie.length() / 2];
-        if (Integer.valueOf(encodedCookie) < 16) {
+        if (encodedCookie.length() == 1) {
             bytes[0] = Integer.valueOf(encodedCookie).byteValue();
         } else {
             for (int i = 0; i < encodedCookie.length(); i += 2) {

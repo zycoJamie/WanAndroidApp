@@ -25,4 +25,9 @@
     <string name="article_tag_hot">热门</string>
     <string name="share_element_view">share_element_view</string>
     <string name="please_you_must_login">登录才能收藏文章哟</string>
+    <string name="please_you_must_login_2">登录才能取消关注哟</string>
+    <string name="collect_article">收藏文章成功</string>
+    <string name="collect_cancel_article">取消关注</string>
+    <!-- 登录 -->
+    <string name="login_success_auto">已经为您自动登录啦 好开森！</string>
 </resources>

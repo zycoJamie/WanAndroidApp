@@ -40,6 +40,6 @@ public class HttpLoggingInterceptor implements Interceptor {
         String respBody = buffer.clone().readString(charset);
         LogUtil.i("响应码: " + response.code() + "\n" +
                 "响应体: " + respBody);
-        return null;
+        return response;
     }
 }

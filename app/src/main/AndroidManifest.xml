@@ -23,6 +23,7 @@
         <activity android:name=".ui.login.LoginActivity"/>
         <activity android:name=".ui.main.activity.AriticleDetailsActivity"/>
         <activity android:name=".ui.knowledge.activity.KnowledgeClassifyActivity"/>
+        <activity android:name=".ui.login.RegisterActivity"/>
     </application>
 
 </manifest>

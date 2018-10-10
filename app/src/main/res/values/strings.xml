@@ -32,8 +32,16 @@
     <string name="login_success_auto">已经为您自动登录啦 好开森！</string>
     <string name="login_account_text_hint">请输入用户名</string>
     <string name="login_pwd_text_hint">请输入密码</string>
+    <string name="login_pwd_confirm_text_hint">确认密码</string>
     <string name="login_button_hint">登录鸭</string>
     <string name="login_register_button_hint">点我注册</string>
+    <string name="login_tool_bar_title">登录</string>
+    <string name="login_account_illegal">用户名包含非法字符</string>
+    <string name="login_password_illegal">密码包含非法字符</string>
+    <string name="login_length_illegal">用户名或密码长度必须大于6位</string>
+    <string name="login_success">登录成功了鸭</string>
+    <string name="login_error">被不明原因干扰 登录出错了鸭</string>
     <!-- 注册 -->
+    <string name="register_button_hint">成为会员吧</string>
 
 </resources>

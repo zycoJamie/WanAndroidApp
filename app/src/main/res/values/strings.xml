@@ -42,6 +42,10 @@
     <string name="login_success">登录成功了鸭</string>
     <string name="login_error">被不明原因干扰 登录出错了鸭</string>
     <!-- 注册 -->
+    <string name="register_tool_bar_title">注册</string>
     <string name="register_button_hint">成为会员吧</string>
+    <string name="register_password_is_different_from_confirm_password">两次密码不同</string>
+    <string name="register_success">欢迎加入开发者的世界</string>
+    <string name="register_error">呜呜呜 你被服务器拒绝了</string>
 
 </resources>

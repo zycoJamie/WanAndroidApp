@@ -66,10 +66,10 @@ public class HomePagePresenter extends BasePresenter<HomePageContract.IView> imp
                         .compose(RxUtil.rxSchedulerHelper())
                         .subscribe(homePageArticleBeanBaseResponse -> {
                             if (homePageArticleBeanBaseResponse.getErrorCode() == Constant.REQUEST_SUCCESS) {
-                                LogUtil.i(TAG,"homepage article success");
+                                LogUtil.i(TAG, "homepage article success");
                                 mView.getHomepageListOk(homePageArticleBeanBaseResponse.getData(), isRefresh);
                             } else {
-                                LogUtil.i(TAG,"homepage article error");
+                                LogUtil.i(TAG, "homepage article error");
                                 mView.getHomepageListErr(homePageArticleBeanBaseResponse.getErrorMsg());
                             }
                         }, throwable -> mView.getHomepageListErr(throwable.getMessage())));
@@ -83,10 +83,10 @@ public class HomePagePresenter extends BasePresenter<HomePageContract.IView> imp
                         .compose(RxUtil.rxSchedulerHelper())
                         .subscribe(listBaseResponse -> {
                             if (listBaseResponse.getErrorCode() == Constant.REQUEST_SUCCESS) {
-                                LogUtil.i(TAG,"banner success");
+                                LogUtil.i(TAG, "banner success");
                                 mView.getBannerOk(listBaseResponse.getData());
                             } else {
-                                LogUtil.i(TAG,"banner error");
+                                LogUtil.i(TAG, "banner error");
                                 mView.getBannerErr(listBaseResponse.getErrorMsg());
                             }
                         }, throwable -> mView.getBannerErr(throwable.getMessage())));
@@ -153,14 +153,23 @@ public class HomePagePresenter extends BasePresenter<HomePageContract.IView> imp
                         .compose(RxUtil.rxSchedulerHelper())
                         .subscribe(baseResponse -> {
                             if (baseResponse.getErrorCode() == Constant.REQUEST_SUCCESS) {
-                                if (baseResponse.getData() != null) {
-                                    LogUtil.i(TAG, (String) baseResponse.getData());
-                                    mView.collectArticleOK((String) baseResponse.getData());
+                                LogUtil.i(TAG, "收藏文章success");
+                                if (baseResponse.getData() == null) { //json字符串对应属性为null，那么转化过来的json对象也为null
+                                    LogUtil.i(TAG, "data null");
                                 } else {
-                                    mView.collectArticleErr(baseResponse.getErrorMsg());
+                                    LogUtil.i(TAG, "data !null");
                                 }
+                                //LogUtil.i(TAG, (String) baseResponse.getData()); 出现Exception 抛出异常，由后面处理Throwable的Consumer处理
+
+                                mView.collectArticleOK("收藏文章成功");
+                            } else {
+                                LogUtil.i(TAG, "收藏文章error");
+                                mView.collectArticleErr(baseResponse.getErrorMsg());
                             }
-                        }, throwable -> mView.collectArticleErr(throwable.getMessage()))
+                        }, throwable -> {
+                            LogUtil.i(TAG, "收藏文章exception");
+                            mView.collectArticleErr(throwable.getMessage());
+                        })
         );
 
     }
@@ -173,12 +182,10 @@ public class HomePagePresenter extends BasePresenter<HomePageContract.IView> imp
                         .compose(RxUtil.rxSchedulerHelper())
                         .subscribe(baseResponse -> {
                             if (baseResponse.getErrorCode() == Constant.REQUEST_SUCCESS) {
-                                if (baseResponse.getData() != null) {
-                                    LogUtil.i(TAG, (String) baseResponse.getData());
-                                    mView.cancelCollectArticleOK((String) baseResponse.getData());
-                                } else {
-                                    mView.cancelCollectArticleErr(baseResponse.getErrorMsg());
-                                }
+                                mView.cancelCollectArticleOK("取消文章成功");
+                            } else {
+                                LogUtil.i(TAG, "取消文章error");
+                                mView.cancelCollectArticleErr(baseResponse.getErrorMsg());
                             }
                         }, throwable -> mView.cancelCollectArticleErr(throwable.getMessage()))
         );

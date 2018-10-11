@@ -5,7 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="?attr/actionBarSize"
     android:background="@color/theme"
+    style="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
     app:titleTextColor="@color/white_255"
+    app:titleTextAppearance="@style/Toolbar.TitleText"
     app:contentInsetStart="@dimen/dp_0"
     app:navigationIcon="@drawable/ic_back"
     android:id="@+id/tb_common">

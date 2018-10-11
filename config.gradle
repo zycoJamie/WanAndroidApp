@@ -42,6 +42,8 @@ ext {
             gsonVersion                 : "2.8.5",
             //adapterHelper
             recyclerAdapterHelperVersion: "2.9.42",
+            //agentWebView
+            agentWebViewVersion         : "4.0.2",
     ]
 
     dependencies = [
@@ -91,7 +93,8 @@ ext {
             "gson"                 : "com.google.code.gson:gson:${version["gsonVersion"]}",
             //adapterHelper
             "recyclerAdapterHelper": "com.github.CymChad:BaseRecyclerViewAdapterHelper:${version["recyclerAdapterHelperVersion"]}",
-
+            //agentWebView
+            "agentWebView"         : "com.just.agentweb:agentweb:${version["agentWebViewVersion"]}",
     ]
 
 

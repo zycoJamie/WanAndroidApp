@@ -28,7 +28,7 @@ public abstract class BaseRootActivity<T extends AbsPresenter> extends BaseActiv
         if (mActivity == null) {
             return;
         }
-        /*mNormalView=findViewById(R.id.normal_view);*/
+        mNormalView=findViewById(R.id.normal_view);
         if (mNormalView == null) {
             throw new IllegalStateException("the subclass of BaseRootActivity need a View of \"normal_view\" ");
         }

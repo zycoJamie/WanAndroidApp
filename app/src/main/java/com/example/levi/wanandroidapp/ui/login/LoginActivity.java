@@ -1,6 +1,8 @@
 package com.example.levi.wanandroidapp.ui.login;
 
 
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.EditText;
@@ -35,6 +37,17 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements Login
 
     private String username;
     private String password;
+
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (getIntent() != null && getIntent().getExtras() != null) {
+            username = getIntent().getExtras().getString(Constant.EXTRA_USERNAME);
+            password = getIntent().getExtras().getString(Constant.EXTRA_PASSWORD);
+            mAccountEt.setText(username);
+            mPwdEt.setText(password);
+        }
+    }
 
     @Override
     protected void initInject() {

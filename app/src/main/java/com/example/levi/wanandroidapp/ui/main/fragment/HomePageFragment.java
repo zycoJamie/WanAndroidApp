@@ -22,7 +22,7 @@ import com.example.levi.wanandroidapp.model.constant.MessageEvent;
 import com.example.levi.wanandroidapp.presenter.main.HomePagePresenter;
 import com.example.levi.wanandroidapp.ui.knowledge.activity.KnowledgeClassifyActivity;
 import com.example.levi.wanandroidapp.ui.login.LoginActivity;
-import com.example.levi.wanandroidapp.ui.main.activity.AriticleDetailsActivity;
+import com.example.levi.wanandroidapp.ui.main.activity.ArticleDetailsActivity;
 import com.example.levi.wanandroidapp.ui.main.adapter.HomePageAdapter;
 import com.example.levi.wanandroidapp.util.app.LogUtil;
 import com.example.levi.wanandroidapp.util.app.SharedPreferenceUtil;
@@ -87,11 +87,11 @@ public class HomePageFragment extends BaseRootFragment<HomePagePresenter> implem
         mImageList = new ArrayList<>();
         mTitleList = new ArrayList<>();
         if (Constant.DEFAULT.equals(SharedPreferenceUtil.get(mActivity, Constant.USERNAME, Constant.DEFAULT))) {
-            LogUtil.i(TAG,"无登录信息");
+            LogUtil.i(TAG, "无登录信息");
             mPresenter.getBanner();
             mPresenter.getHomepageList(0);
         } else {
-            LogUtil.i(TAG,"有登录信息");
+            LogUtil.i(TAG, "有登录信息");
             mPresenter.loginAndLoad();
         }
         mAdapter = new HomePageAdapter(R.layout.item_homepage, mArticleList);
@@ -161,7 +161,7 @@ public class HomePageFragment extends BaseRootFragment<HomePagePresenter> implem
 
     @Override
     public void getHomepageListErr(String info) {
-        LogUtil.i(TAG,"error message:"+info);
+        LogUtil.i(TAG, "error message:" + info);
         showError();
     }
 
@@ -189,14 +189,14 @@ public class HomePageFragment extends BaseRootFragment<HomePagePresenter> implem
             bundle.putString(Constant.ARTICLE_TITLE, mTitleList.get(position));
             bundle.putString(Constant.ARTICLE_LINK, mLinkList.get(position));
             if (!TextUtils.isEmpty(mLinkList.get(position))) {
-                SkipUtil.overlay(mActivity, AriticleDetailsActivity.class, bundle);
+                SkipUtil.overlay(mActivity, ArticleDetailsActivity.class, bundle);
             }
         });
     }
 
     @Override
     public void getBannerErr(String info) {
-        LogUtil.i(TAG,"error message:"+info);
+        LogUtil.i(TAG, "error message:" + info);
         showError();
     }
 
@@ -259,7 +259,7 @@ public class HomePageFragment extends BaseRootFragment<HomePagePresenter> implem
         bundle.putString(Constant.ARTICLE_LINK, mAdapter.getData().get(position).getLink());
         bundle.putBoolean(Constant.ARTICLE_IS_COLLECT, mAdapter.getData().get(position).isCollect());
         bundle.putInt(Constant.ARTICLE_ID, mAdapter.getData().get(position).getId());
-        Intent intent = new Intent(mActivity, AriticleDetailsActivity.class);
+        Intent intent = new Intent(mActivity, ArticleDetailsActivity.class);
         intent.putExtras(bundle);
         /*ActivityOptionsCompat optionsCompat=ActivityOptionsCompat.makeSceneTransitionAnimation(mActivity,view,mContext.getString(R.string.share_element_view));
         startActivity(intent,optionsCompat.toBundle());*/
@@ -285,10 +285,14 @@ public class HomePageFragment extends BaseRootFragment<HomePagePresenter> implem
                 break;
             }
             case R.id.iv_collect: {
+                LogUtil.i(TAG, String.valueOf((Boolean) SharedPreferenceUtil.get(mContext, Constant.ISLOGIN, false)));
                 if ((Boolean) SharedPreferenceUtil.get(mContext, Constant.ISLOGIN, false)) {
+                    LogUtil.i(TAG,"进入P层");
                     if (mAdapter.getData().get(mClickPosition).isCollect()) {
+                        LogUtil.i(TAG,"取消文章");
                         mPresenter.cancelCollectArticle(mAdapter.getData().get(mClickPosition).getId());
                     } else {
+                        LogUtil.i(TAG,"收藏文章");
                         mPresenter.collectArticle(mAdapter.getData().get(mClickPosition).getId());
                     }
                 } else {

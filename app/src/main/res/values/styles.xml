@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
@@ -18,6 +18,12 @@
         <item name="android:itemBackground">@color/white_255</item>
         <!-- 取消启动APP时的白屏 -->
         <item name="android:windowDisablePreview">true</item>
+    </style>
+
+    <!-- ToolBar text style-->
+    <style name="Toolbar.TitleText" parent="TextAppearance.Widget.AppCompat.Toolbar.Title" tools:targetApi="21">
+        <item name="android:textSize">@dimen/sp_16</item>
+        <item name="android:colorControlNormal">@color/white_255</item>
     </style>
 
 </resources>

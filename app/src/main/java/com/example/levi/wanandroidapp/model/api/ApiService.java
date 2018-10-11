@@ -43,6 +43,14 @@ public interface ApiService {
     Observable<BaseResponse<UserInfo>> login(@Field("username") String username,@Field("password")String password);
 
     /**
+     * 注册
+     */
+    @Headers({"baseUrl:normal"})
+    @POST("user/register")
+    @FormUrlEncoded
+    Observable<BaseResponse<UserInfo>> register(@Field("username") String username,@Field("password") String password,@Field("repassword") String confirmPWD);
+
+    /**
      * 收藏文章
      */
     @Headers({"baseUrl:normal"})

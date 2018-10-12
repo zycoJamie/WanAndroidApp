@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/normal_view"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/grey"
+    tools:ignore="RtlCompat">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <include layout="@layout/common_tool_bar_2" />
+    </android.support.design.widget.AppBarLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <com.flyco.tablayout.SlidingTabLayout
+            android:id="@+id/tl_knowledge_classify"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_48"
+            android:background="@mipmap/bg_blue_gradient"
+            app:tl_textAllCaps="false"
+            app:tl_textBold="BOTH"
+            app:tl_textsize="@dimen/sp_14" />
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/vp_knowledge_classify"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white_255">
+
+        </android.support.v4.view.ViewPager>
+
+    </LinearLayout>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fb_scroll_2_top"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="@dimen/dp_70"
+        android:layout_marginEnd="@dimen/dp_12"
+        android:src="@mipmap/ic_scroll_to_top"
+        app:borderWidth="0dp"
+        app:layout_behavior="@string/bye_burger_float_behavior" />
+
+</RelativeLayout>

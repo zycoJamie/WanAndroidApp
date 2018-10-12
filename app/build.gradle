@@ -54,5 +54,6 @@ dependencies {
     implementation rootProject.ext.dependencies["recyclerAdapterHelper"]
     implementation rootProject.ext.dependencies["cardView-v7"]
     implementation rootProject.ext.dependencies["agentWebView"]
+    implementation rootProject.ext.dependencies["tabLayout"]
 
 }

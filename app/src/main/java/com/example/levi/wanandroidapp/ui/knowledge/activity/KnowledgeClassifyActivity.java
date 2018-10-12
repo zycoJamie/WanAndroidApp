@@ -1,5 +1,6 @@
 package com.example.levi.wanandroidapp.ui.knowledge.activity;
 
+import com.example.levi.wanandroidapp.R;
 import com.example.levi.wanandroidapp.base.activity.BaseActivity;
 
 /**
@@ -14,7 +15,7 @@ public class KnowledgeClassifyActivity  extends BaseActivity{
 
     @Override
     protected int getLayoutId() {
-        return 0;
+        return R.layout.activity_knowledge_classify;
     }
 
     @Override

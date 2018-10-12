@@ -47,5 +47,10 @@
     <string name="register_password_is_different_from_confirm_password">两次密码不同</string>
     <string name="register_success">欢迎加入开发者的世界</string>
     <string name="register_error">呜呜呜 你被服务器拒绝了</string>
+    <!-- 文章详情 -->
+    <string name="detail_menu_share">分享</string>
+    <string name="detail_menu_collect">收藏</string>
+    <string name="detail_menu_browser">浏览器打开</string>
+    <string name="detail_menu_collect_2">已经关注</string>
 
 </resources>

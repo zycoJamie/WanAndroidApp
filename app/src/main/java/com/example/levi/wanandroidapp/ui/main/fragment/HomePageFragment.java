@@ -110,7 +110,7 @@ public class HomePageFragment extends BaseRootFragment<HomePagePresenter> implem
                 break;
             }
             case EventConstant.REFRESH_HOMEPAGE: {
-                mListRv.smoothScrollToPosition(0);
+                mPresenter.autoRefresh();
                 break;
             }
         }

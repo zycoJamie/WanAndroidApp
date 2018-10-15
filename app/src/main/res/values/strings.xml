@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">玩Android</string>
+    <string name="app_name">Android开发者</string>
     <!-- splash -->
     <string name="splash_skip">跳过</string>
     <!-- loading -->
@@ -52,5 +52,7 @@
     <string name="detail_menu_collect">收藏</string>
     <string name="detail_menu_browser">浏览器打开</string>
     <string name="detail_menu_collect_2">已经关注</string>
+    <!-- knowledge list -->
+    <string name="knowledge_no_more_data">我可是有底线滴</string>
 
 </resources>

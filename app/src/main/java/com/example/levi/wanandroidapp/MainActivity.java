@@ -22,6 +22,7 @@ import com.example.levi.wanandroidapp.model.constant.Constant;
 import com.example.levi.wanandroidapp.model.constant.EventConstant;
 import com.example.levi.wanandroidapp.model.constant.MessageEvent;
 import com.example.levi.wanandroidapp.ui.drawer.VideoActivity;
+import com.example.levi.wanandroidapp.ui.knowledge.fragment.KnowledgeFragment;
 import com.example.levi.wanandroidapp.ui.login.LoginActivity;
 import com.example.levi.wanandroidapp.ui.main.fragment.HomePageFragment;
 import com.example.levi.wanandroidapp.util.app.BottomNavigationHelper;
@@ -104,6 +105,7 @@ public class MainActivity extends BaseRootActivity implements NavigationView.OnN
     private void initFragment() {
         mFragments = new ArrayList<>();
         mFragments.add(HomePageFragment.getInstance());
+        mFragments.add(KnowledgeFragment.getInstance());
     }
 
     @Override
@@ -130,12 +132,12 @@ public class MainActivity extends BaseRootActivity implements NavigationView.OnN
                 switch (item.getItemId()) {
                     case R.id.tab_main: {
                         mScroll2TopFb.setVisibility(View.VISIBLE);
-                        /*selectFragment(0);*/
+                        selectFragment(0);
                         break;
                     }
                     case R.id.tab_knowledge_hierarchy: {
                         mScroll2TopFb.setVisibility(View.VISIBLE);
-                        /*selectFragment(1);*/
+                        selectFragment(1);
                         break;
                     }
                     case R.id.tab_project: {

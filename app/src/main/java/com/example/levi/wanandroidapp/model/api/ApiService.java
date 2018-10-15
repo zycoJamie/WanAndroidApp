@@ -1,5 +1,7 @@
 package com.example.levi.wanandroidapp.model.api;
 
+import com.example.levi.wanandroidapp.data.knowledge.KnowledgeClassifyListBean;
+import com.example.levi.wanandroidapp.data.knowledge.KnowledgeListBean;
 import com.example.levi.wanandroidapp.data.login.UserInfo;
 import com.example.levi.wanandroidapp.data.main.BannerBean;
 import com.example.levi.wanandroidapp.data.main.HomePageArticleBean;
@@ -13,6 +15,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 /**
  * Author: Levi
@@ -40,7 +43,7 @@ public interface ApiService {
     @Headers({"baseUrl:normal"})
     @POST("user/login")
     @FormUrlEncoded
-    Observable<BaseResponse<UserInfo>> login(@Field("username") String username,@Field("password")String password);
+    Observable<BaseResponse<UserInfo>> login(@Field("username") String username, @Field("password") String password);
 
     /**
      * 注册
@@ -48,7 +51,7 @@ public interface ApiService {
     @Headers({"baseUrl:normal"})
     @POST("user/register")
     @FormUrlEncoded
-    Observable<BaseResponse<UserInfo>> register(@Field("username") String username,@Field("password") String password,@Field("repassword") String confirmPWD);
+    Observable<BaseResponse<UserInfo>> register(@Field("username") String username, @Field("password") String password, @Field("repassword") String confirmPWD);
 
     /**
      * 收藏文章
@@ -59,11 +62,25 @@ public interface ApiService {
 
     /**
      * 取消收藏的文章
+     *
      * @param id 主页文章列表中，文章的id
      */
     @Headers({"baseUrl:normal"})
     @POST("lg/uncollect_originId/{id}/json")
     Observable<BaseResponse> cancleCollectArticle(@Path("id") int id);
 
+    /**
+     * 某一类知识下的文章列表
+     */
+    @Headers({"baseUrl:normal"})
+    @GET("article/list/{page}/json")
+    Observable<BaseResponse<KnowledgeClassifyListBean>> getKnowledgeClassifyList(@Path("page") int page, @Query("cid") int cid);
+
+    /**
+     * 整个知识体系
+     */
+    @Headers({"baseUrl:normal"})
+    @GET("tree/json")
+    Observable<BaseResponse<List<KnowledgeListBean>>> getHierarchy();
 
 }

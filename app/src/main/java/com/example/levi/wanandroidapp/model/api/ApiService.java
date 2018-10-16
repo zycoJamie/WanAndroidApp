@@ -5,6 +5,8 @@ import com.example.levi.wanandroidapp.data.knowledge.KnowledgeListBean;
 import com.example.levi.wanandroidapp.data.login.UserInfo;
 import com.example.levi.wanandroidapp.data.main.BannerBean;
 import com.example.levi.wanandroidapp.data.main.HomePageArticleBean;
+import com.example.levi.wanandroidapp.data.project.ProjectBean;
+import com.example.levi.wanandroidapp.data.project.ProjectListBean;
 
 import java.util.List;
 
@@ -82,5 +84,19 @@ public interface ApiService {
     @Headers({"baseUrl:normal"})
     @GET("tree/json")
     Observable<BaseResponse<List<KnowledgeListBean>>> getHierarchy();
+
+    /**
+     * 整个项目分类
+     */
+    @Headers({"baseUrl:normal"})
+    @GET("project/tree/json")
+    Observable<BaseResponse<List<ProjectBean>>> getProjectTitle();
+
+    /**
+     * 单个项目种类下的项目列表
+     */
+    @Headers({"baseUrl:normal"})
+    @GET("project/list/{page}/json")
+    Observable<BaseResponse<ProjectListBean>> getProjectList(@Path("page") int page, @Query("cid") int cid);
 
 }

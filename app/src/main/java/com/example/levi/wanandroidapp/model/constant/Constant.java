@@ -22,6 +22,7 @@ public class Constant {
     public static final String HOMEPAGE_SUPER_CNAME = "homepage_super_name";
     public static final String KNOWLEDGE_CID = "knowledge_cid";
     public static final String KNOWLEDGE_FIRST_TYPE = "knowledge_first_type";
+    public static final String PROJECT_CID = "project_cid";
 
     /**
      * user information

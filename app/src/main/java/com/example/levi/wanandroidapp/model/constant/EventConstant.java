@@ -23,4 +23,9 @@ public class EventConstant {
      */
     public static final int LOGIN_SUCCESS = 107;
     public static final int LOGIN_OUT_SUCCESS = 109;
+
+    /**
+     * 刷新项目列表页面
+     */
+    public static final int REFRESH_PROJECT_LIST = 211;
 }

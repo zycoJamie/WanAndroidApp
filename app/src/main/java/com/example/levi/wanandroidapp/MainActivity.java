@@ -25,6 +25,7 @@ import com.example.levi.wanandroidapp.ui.drawer.VideoActivity;
 import com.example.levi.wanandroidapp.ui.knowledge.fragment.KnowledgeFragment;
 import com.example.levi.wanandroidapp.ui.login.LoginActivity;
 import com.example.levi.wanandroidapp.ui.main.fragment.HomePageFragment;
+import com.example.levi.wanandroidapp.ui.project.fragment.ProjectFragment;
 import com.example.levi.wanandroidapp.util.app.BottomNavigationHelper;
 import com.example.levi.wanandroidapp.util.app.SharedPreferenceUtil;
 import com.example.levi.wanandroidapp.util.app.SkipUtil;
@@ -106,6 +107,7 @@ public class MainActivity extends BaseRootActivity implements NavigationView.OnN
         mFragments = new ArrayList<>();
         mFragments.add(HomePageFragment.getInstance());
         mFragments.add(KnowledgeFragment.getInstance());
+        mFragments.add(ProjectFragment.getInstance());
     }
 
     @Override
@@ -126,33 +128,30 @@ public class MainActivity extends BaseRootActivity implements NavigationView.OnN
      */
     private void initNavigation() {
         BottomNavigationHelper.disableShiftMode(mBottomNavigationView);
-        mBottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.tab_main: {
-                        mScroll2TopFb.setVisibility(View.VISIBLE);
-                        selectFragment(0);
-                        break;
-                    }
-                    case R.id.tab_knowledge_hierarchy: {
-                        mScroll2TopFb.setVisibility(View.VISIBLE);
-                        selectFragment(1);
-                        break;
-                    }
-                    case R.id.tab_project: {
-                        mScroll2TopFb.setVisibility(View.VISIBLE);
-                        /*selectFragment(2);*/
-                        break;
-                    }
-                    case R.id.tab_mine: {
-                        mScroll2TopFb.setVisibility(View.VISIBLE);
-                        /*selectFragment(3);*/
-                        break;
-                    }
+        mBottomNavigationView.setOnNavigationItemSelectedListener(item -> {
+            switch (item.getItemId()) {
+                case R.id.tab_main: {
+                    mScroll2TopFb.setVisibility(View.VISIBLE);
+                    selectFragment(0);
+                    break;
                 }
-                return true;
+                case R.id.tab_knowledge_hierarchy: {
+                    mScroll2TopFb.setVisibility(View.VISIBLE);
+                    selectFragment(1);
+                    break;
+                }
+                case R.id.tab_project: {
+                    mScroll2TopFb.setVisibility(View.VISIBLE);
+                    selectFragment(2);
+                    break;
+                }
+                case R.id.tab_mine: {
+                    mScroll2TopFb.setVisibility(View.VISIBLE);
+                    /*selectFragment(3);*/
+                    break;
+                }
             }
+            return true;
         });
     }
 

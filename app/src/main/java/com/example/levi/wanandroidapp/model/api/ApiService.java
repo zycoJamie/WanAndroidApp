@@ -69,7 +69,15 @@ public interface ApiService {
      */
     @Headers({"baseUrl:normal"})
     @POST("lg/uncollect_originId/{id}/json")
-    Observable<BaseResponse> cancleCollectArticle(@Path("id") int id);
+    Observable<BaseResponse> cancelCollectArticle(@Path("id") int id);
+
+    /**
+     * 取消收藏列表里面的文章
+     */
+    @Headers({"baseUrl:normal"})
+    @POST("lg/uncollect/{id}/json")
+    @FormUrlEncoded
+    Observable<BaseResponse> cancelCollectionListArticle(@Path("id") int id, @Field("originId") int originId);
 
     /**
      * 某一类知识下的文章列表

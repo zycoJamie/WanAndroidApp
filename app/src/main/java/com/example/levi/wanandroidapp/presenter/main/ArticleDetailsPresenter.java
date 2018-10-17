@@ -50,7 +50,7 @@ public class ArticleDetailsPresenter extends BasePresenter<ArticleDetailsContrac
     public void cancelCollectArticle(int id) {
         mCompositeDisposable.add(
                 ApiStore.createApi(ApiService.class)
-                        .cancleCollectArticle(id)
+                        .cancelCollectArticle(id)
                         .compose(RxUtil.rxSchedulerHelper())
                         .subscribe(baseResponse -> {
                             if (baseResponse.getErrorCode() == Constant.REQUEST_SUCCESS) {

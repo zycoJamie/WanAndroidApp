@@ -33,6 +33,7 @@
         <activity android:name=".ui.main.activity.ArticleDetailsActivity" />
         <activity android:name=".ui.knowledge.activity.KnowledgeClassifyActivity" />
         <activity android:name=".ui.login.RegisterActivity" />
+        <activity android:name=".ui.mine.activity.CollectionListActivity"/>
     </application>
 
 </manifest>

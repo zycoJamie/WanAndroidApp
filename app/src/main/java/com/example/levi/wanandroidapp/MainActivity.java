@@ -25,6 +25,7 @@ import com.example.levi.wanandroidapp.ui.drawer.VideoActivity;
 import com.example.levi.wanandroidapp.ui.knowledge.fragment.KnowledgeFragment;
 import com.example.levi.wanandroidapp.ui.login.LoginActivity;
 import com.example.levi.wanandroidapp.ui.main.fragment.HomePageFragment;
+import com.example.levi.wanandroidapp.ui.mine.fragment.MineFragment;
 import com.example.levi.wanandroidapp.ui.project.fragment.ProjectFragment;
 import com.example.levi.wanandroidapp.util.app.BottomNavigationHelper;
 import com.example.levi.wanandroidapp.util.app.SharedPreferenceUtil;
@@ -108,6 +109,7 @@ public class MainActivity extends BaseRootActivity implements NavigationView.OnN
         mFragments.add(HomePageFragment.getInstance());
         mFragments.add(KnowledgeFragment.getInstance());
         mFragments.add(ProjectFragment.getInstance());
+        mFragments.add(MineFragment.getInstance());
     }
 
     @Override

@@ -54,5 +54,14 @@
     <string name="detail_menu_collect_2">已经关注</string>
     <!-- knowledge list -->
     <string name="knowledge_no_more_data">我可是有底线滴</string>
+    <!-- mine -->
+    <string name="mine_tv_username">点击头像登录</string>
+    <string name="mine_tv_my_collection">我的收藏</string>
+    <string name="mine_tv_about_me">关于我</string>
+    <string name="mine_logout">退出登录</string>
+    <string name="mine_dialog_cancel">取消</string>
+    <string name="mine_dialog_sure">确定</string>
+    <!-- 我的收藏 -->
+    <string name="collection_tool_bar_title">我的收藏</string>
 
 </resources>

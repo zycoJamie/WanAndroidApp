@@ -60,6 +60,16 @@ public class SharedPreferenceUtil {
     }
 
     /**
+     * 清除所有数据
+     */
+    public static void clear(Context context) {
+        SharedPreferences sp = context.getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sp.edit();
+        editor.clear();
+        SharedPreferencesCompat.apply(editor);
+    }
+
+    /**
      * API9:android 2.3之前 SharedPreferences.Editor没有apply()方法，所以进行兼容处理
      */
     private static class SharedPreferencesCompat {

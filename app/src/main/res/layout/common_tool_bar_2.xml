@@ -10,6 +10,7 @@
     app:titleTextAppearance="@style/Toolbar.TitleText"
     app:contentInsetStart="@dimen/dp_0"
     app:navigationIcon="@drawable/ic_back"
+    app:layout_collapseMode="pin"
     android:id="@+id/tb_common">
 
 </android.support.v7.widget.Toolbar>

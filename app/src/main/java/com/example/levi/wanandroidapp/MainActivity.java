@@ -149,7 +149,7 @@ public class MainActivity extends BaseRootActivity implements NavigationView.OnN
                 }
                 case R.id.tab_mine: {
                     mScroll2TopFb.setVisibility(View.VISIBLE);
-                    /*selectFragment(3);*/
+                    selectFragment(3);
                     break;
                 }
             }

@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.scwang.smartrefresh.header.flyrefresh.MountainSceneView
+        android:id="@+id/msv_bg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:msvPrimaryColor="@color/theme"
+        app:msvViewportHeight="@dimen/dp_340"/>
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/app_bar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_240"
+        android:background="@color/transparent"
+        android:clipChildren="false">
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:id="@+id/collapsing_tool_bar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:contentScrim="@color/red"
+            app:expandedTitleMarginBottom="@dimen/dp_130"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+            <include layout="@layout/common_tool_bar_2"/>
+        </android.support.design.widget.CollapsingToolbarLayout>
+
+    </android.support.design.widget.AppBarLayout>
+
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:id="@+id/srl_about_me"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        app:srlEnableLoadMore="false"
+        app:srlEnableOverScrollBounce="false"
+        app:srlEnablePreviewInEditMode="true"
+        app:srlHeaderHeight="@dimen/dp_100"
+        app:srlHeaderMaxDragRate="1.5"
+        app:srlReboundDuration="200">
+
+        <com.scwang.smartrefresh.header.FlyRefreshHeader
+            android:id="@+id/frh_header"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <android.support.v4.widget.NestedScrollView
+            android:id="@+id/nsv_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/card_shape"
+            android:clipToPadding="false"
+            android:paddingTop="@dimen/dp_25">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingTop="@dimen/dp_10">
+                <ImageView
+                    android:layout_width="@dimen/dp_60"
+                    android:layout_height="@dimen/dp_60"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/dp_16"
+                    android:src="@mipmap/android"/>
+                <TextView
+                    android:id="@+id/tv_version"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/dp_16"
+                    android:gravity="center"
+                    android:text="@string/app_name"
+                    android:textAllCaps="false"
+                    android:textColor="@color/homepage_color"
+                    android:textSize="@dimen/sp_16" />
+                <TextView
+                    android:id="@+id/tv_content"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/dp_16"
+                    android:textColor="@color/homepage_color"
+                    tools:text="@string/about_me_content" />
+            </LinearLayout>
+
+        </android.support.v4.widget.NestedScrollView>
+
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab_airplane"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dp_16"
+        app:elevation="@dimen/dp_0"
+        app:fabSize="normal"
+        app:layout_anchor="@id/nsv_content"
+        app:layout_anchorGravity="top" />
+
+    <com.scwang.smartrefresh.header.flyrefresh.FlyView
+        android:id="@+id/fly_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:elevation="@dimen/dp_3"
+        app:layout_anchor="@id/fab_airplane"
+        app:layout_anchorGravity="center" />
+</android.support.design.widget.CoordinatorLayout>

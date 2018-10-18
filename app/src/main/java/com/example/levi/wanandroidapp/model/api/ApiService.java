@@ -1,5 +1,6 @@
 package com.example.levi.wanandroidapp.model.api;
 
+import com.example.levi.wanandroidapp.data.collection.CollectionListBean;
 import com.example.levi.wanandroidapp.data.knowledge.KnowledgeClassifyListBean;
 import com.example.levi.wanandroidapp.data.knowledge.KnowledgeListBean;
 import com.example.levi.wanandroidapp.data.login.UserInfo;
@@ -70,6 +71,13 @@ public interface ApiService {
     @Headers({"baseUrl:normal"})
     @POST("lg/uncollect_originId/{id}/json")
     Observable<BaseResponse> cancelCollectArticle(@Path("id") int id);
+
+    /**
+     * 收藏列表
+     */
+    @Headers({"baseUrl:normal"})
+    @GET("lg/collect/list/{page}/json")
+    Observable<BaseResponse<CollectionListBean>> collectionListArticle(@Path("page") int page);
 
     /**
      * 取消收藏列表里面的文章

@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.example.levi.wanandroidapp.R;
+import com.example.levi.wanandroidapp.util.app.LogUtil;
 
 /**
  * Author: Levi
@@ -111,7 +112,7 @@ public class CommonDialog extends Dialog {
          * 设置negative button的点击事件
          */
         public Builder setNegativeClickListener(View.OnClickListener onClickListener) {
-            mDialog.onPositiveListener = onClickListener;
+            mDialog.onNegativeListener = onClickListener;
             return this;
         }
 

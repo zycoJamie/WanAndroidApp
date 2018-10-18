@@ -22,10 +22,21 @@
             android:id="@+id/collapsing_tool_bar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:contentScrim="@color/red"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            app:contentScrim="@color/theme"
             app:expandedTitleMarginBottom="@dimen/dp_130"
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
-            <include layout="@layout/common_tool_bar_2"/>
+            <android.support.v7.widget.Toolbar
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:titleTextColor="@color/white_255"
+                app:titleTextAppearance="@style/Toolbar.TitleText"
+                app:contentInsetStart="@dimen/dp_0"
+                app:navigationIcon="@drawable/ic_back"
+                app:layout_collapseMode="pin"
+                android:id="@+id/tb_common"/>
         </android.support.design.widget.CollapsingToolbarLayout>
 
     </android.support.design.widget.AppBarLayout>

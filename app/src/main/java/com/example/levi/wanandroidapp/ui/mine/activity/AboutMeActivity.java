@@ -3,6 +3,7 @@ package com.example.levi.wanandroidapp.ui.mine.activity;
 
 import android.animation.ValueAnimator;
 import android.content.pm.PackageManager;
+import android.content.res.ColorStateList;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
@@ -55,6 +56,7 @@ public class AboutMeActivity extends BaseActivity implements AppBarLayout.OnOffs
     @BindView(R.id.tv_version)
     TextView mVersionTv;
     private View.OnClickListener mThemeListener;
+    private boolean isExpand = true;
 
     @Override
     protected void initUI() {
@@ -109,8 +111,7 @@ public class AboutMeActivity extends BaseActivity implements AppBarLayout.OnOffs
                 public void onClick(View v) {
                     int color = getResources().getColor(ids[index % ids.length]);
                     mRefreshSrl.setPrimaryColors(color);
-                    mAirplaneFab.setBackgroundColor(color);
-                    mCollapsingToolbarLayout.setContentScrimColor(color);
+                    mAirplaneFab.setBackgroundTintList(ColorStateList.valueOf(color));
                     index++;
                 }
             };
@@ -147,7 +148,8 @@ public class AboutMeActivity extends BaseActivity implements AppBarLayout.OnOffs
         if (mScrollView == null || mAirplaneFab == null || mFlyView == null || mMountainSceneView == null || mFlyRefreshHeader == null) {
             return;
         }
-        if (fraction <= minFraction) {
+        if (fraction <= minFraction && isExpand) {
+            isExpand = false;
             mAirplaneFab.animate().scaleX(0).scaleY(0);
             mFlyView.animate().scaleX(0).scaleY(0);
             ValueAnimator valueAnimator = ValueAnimator.ofInt(mScrollView.getPaddingTop(), 0);
@@ -155,7 +157,8 @@ public class AboutMeActivity extends BaseActivity implements AppBarLayout.OnOffs
                     .addUpdateListener(animation -> mScrollView.setPadding(0, (Integer) animation.getAnimatedValue(), 0, 0));
             valueAnimator.start();
         }
-        if (fraction >= maxFraction) {
+        if (fraction >= maxFraction && !isExpand) {
+            isExpand = true;
             mAirplaneFab.animate().scaleX(1).scaleY(1);
             mFlyView.animate().scaleX(1).scaleY(1);
             ValueAnimator valueAnimator = ValueAnimator.ofInt(0, DensityUtil.dp2px(25));

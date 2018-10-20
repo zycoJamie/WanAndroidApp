@@ -6,6 +6,8 @@ import com.example.levi.wanandroidapp.data.knowledge.KnowledgeListBean;
 import com.example.levi.wanandroidapp.data.login.UserInfo;
 import com.example.levi.wanandroidapp.data.main.BannerBean;
 import com.example.levi.wanandroidapp.data.main.HomePageArticleBean;
+import com.example.levi.wanandroidapp.data.main.HotBean;
+import com.example.levi.wanandroidapp.data.main.SearchHotWordBean;
 import com.example.levi.wanandroidapp.data.project.ProjectBean;
 import com.example.levi.wanandroidapp.data.project.ProjectListBean;
 
@@ -114,5 +116,19 @@ public interface ApiService {
     @Headers({"baseUrl:normal"})
     @GET("project/list/{page}/json")
     Observable<BaseResponse<ProjectListBean>> getProjectList(@Path("page") int page, @Query("cid") int cid);
+
+    /**
+     * 获取热门网站
+     */
+    @Headers({"baseUrl:normal"})
+    @GET("friend/json")
+    Observable<BaseResponse<List<HotBean>>> getHotWebsite();
+
+    /**
+     * 获取搜索热词
+     */
+    @Headers({"baseUrl:normal"})
+    @GET("hotkey/json")
+    Observable<BaseResponse<List<SearchHotWordBean>>> getHotWord();
 
 }

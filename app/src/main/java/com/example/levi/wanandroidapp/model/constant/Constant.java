@@ -31,9 +31,9 @@ public class Constant {
     public static final String USERNAME = "user_name";
     public static final String PASSWORD = "password";
 
-    public static final String LOGIN_DATA="login_data";
-    public static final String BANNER_DATA="banner_data";
-    public static final String ARTICLE_DATA="article_data";
+    public static final String LOGIN_DATA = "login_data";
+    public static final String BANNER_DATA = "banner_data";
+    public static final String ARTICLE_DATA = "article_data";
 
     /**
      * base url
@@ -45,11 +45,12 @@ public class Constant {
     /**
      * SharedPreference
      */
-    public static final String DEFAULT="default";
+    public static final String DEFAULT = "default";
+    public static final String SEARCH_HISTORY = "search_history";
 
     /**
      * intent extra
      */
-    public static final String EXTRA_USERNAME="extra_username";
-    public static final String EXTRA_PASSWORD="extra_password";
+    public static final String EXTRA_USERNAME = "extra_username";
+    public static final String EXTRA_PASSWORD = "extra_password";
 }

@@ -25,6 +25,7 @@ import com.example.levi.wanandroidapp.ui.drawer.VideoActivity;
 import com.example.levi.wanandroidapp.ui.knowledge.fragment.KnowledgeFragment;
 import com.example.levi.wanandroidapp.ui.login.LoginActivity;
 import com.example.levi.wanandroidapp.ui.main.activity.HotActivity;
+import com.example.levi.wanandroidapp.ui.main.activity.SearchActivity;
 import com.example.levi.wanandroidapp.ui.main.fragment.HomePageFragment;
 import com.example.levi.wanandroidapp.ui.mine.fragment.MineFragment;
 import com.example.levi.wanandroidapp.ui.project.fragment.ProjectFragment;
@@ -235,12 +236,11 @@ public class MainActivity extends BaseRootActivity implements NavigationView.OnN
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_main_hot: {
-                // TODO: 2018/10/4 menu function
-                SkipUtil.overlay(mContext,HotActivity.class);
+                SkipUtil.overlay(mContext, HotActivity.class);
                 break;
             }
             case R.id.menu_main_search: {
-
+                SkipUtil.overlay(mContext, SearchActivity.class);
                 break;
             }
         }

@@ -5,6 +5,7 @@ import android.view.ViewGroup;
 
 import com.example.levi.wanandroidapp.R;
 import com.example.levi.wanandroidapp.base.presenter.AbsPresenter;
+import com.example.levi.wanandroidapp.util.app.LogUtil;
 
 /**
  * Created by zyco
@@ -28,7 +29,7 @@ public abstract class BaseRootActivity<T extends AbsPresenter> extends BaseActiv
         if (mActivity == null) {
             return;
         }
-        mNormalView=findViewById(R.id.normal_view);
+        mNormalView = findViewById(R.id.normal_view);
         if (mNormalView == null) {
             throw new IllegalStateException("the subclass of BaseRootActivity need a View of \"normal_view\" ");
         }
@@ -36,6 +37,7 @@ public abstract class BaseRootActivity<T extends AbsPresenter> extends BaseActiv
             throw new IllegalStateException("\"normal_view\" must inherit ViewGroup");
         }
         ViewGroup parent = (ViewGroup) mNormalView.getParent();
+        LogUtil.i(parent.getClass().getSimpleName());
         View.inflate(mActivity, R.layout.view_loading, parent);
         View.inflate(mActivity, R.layout.view_error, parent);
         View.inflate(mActivity, R.layout.view_empty, parent);

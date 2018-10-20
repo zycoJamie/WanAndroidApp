@@ -21,6 +21,7 @@ ext {
             smartRefreshVersion         : "1.0.5.1",
             bannerVersion               : "1.4.10",
             tabLayoutVersion            : "2.1.2@aar",
+            tagFlowLayoutVersion        : "1.1.2",
 
             //fragmentation
             fragmentationVersion        : "1.3.5",
@@ -62,6 +63,7 @@ ext {
             "smartRefreshHeader"   : "com.scwang.smartrefresh:SmartRefreshHeader:${version["smartRefreshVersion"]}",
             "banner"               : "com.youth.banner:banner:${version["bannerVersion"]}",
             "tabLayout"            : "com.flyco.tablayout:FlycoTabLayout_Lib:${version["tabLayoutVersion"]}",
+            "tagFlowLayout"        : "com.hyman:flowlayout-lib:${version["tagFlowLayoutVersion"]}",
 
             //fragmentation
             "fragmentation"        : "me.yokeyword:fragmentation:${version["fragmentationVersion"]}",

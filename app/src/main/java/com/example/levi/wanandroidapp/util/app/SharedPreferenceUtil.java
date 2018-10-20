@@ -60,6 +60,16 @@ public class SharedPreferenceUtil {
     }
 
     /**
+     * 移除指定键值对
+     */
+    public static void remove(Context context, String key) {
+        SharedPreferences sp = context.getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sp.edit();
+        editor.remove(key);
+        SharedPreferencesCompat.apply(editor);
+    }
+
+    /**
      * 清除所有数据
      */
     public static void clear(Context context) {

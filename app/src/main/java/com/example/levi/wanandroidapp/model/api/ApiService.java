@@ -131,4 +131,8 @@ public interface ApiService {
     @GET("hotkey/json")
     Observable<BaseResponse<List<SearchHotWordBean>>> getHotWord();
 
+    @Headers({"baseUrl:normal"})
+    @POST("article/query/{page}/json")
+    @FormUrlEncoded
+    Observable<BaseResponse<HomePageArticleBean>> getSearchResult(@Path("page") int page,@Field("k") String key);
 }

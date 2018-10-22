@@ -1,6 +1,10 @@
 package com.example.levi.wanandroidapp.util.app;
 
+import android.content.Context;
 import android.graphics.Color;
+import android.view.inputmethod.InputMethodManager;
+
+import com.example.levi.wanandroidapp.base.app.MyApplication;
 
 import java.util.Random;
 
@@ -9,6 +13,16 @@ import java.util.Random;
  * CreateDate: 2018/10/20 18:12
  */
 public class CommonUtil {
+
+    /**
+     * 隐藏键盘
+     */
+    public static void hideKeyBoard(){
+        InputMethodManager imm= (InputMethodManager) MyApplication.getInstance().getSystemService(Context.INPUT_METHOD_SERVICE);
+        assert imm!=null;
+        imm.toggleSoftInput(0,0);
+    }
+
     /**
      * 获取随机rgb颜色值
      */

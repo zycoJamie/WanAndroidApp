@@ -89,5 +89,8 @@
     <string name="search_hot_word">热词</string>
     <string name="search_history">搜索历史</string>
     <string name="search_clear_history">清空</string>
+    <string name="search_dialog_clear_history">清空历史记录</string>
+    <string name="search_dialog_clear_history_question">确定清除历史记录吗?</string>
+    <string name="search_menu_query_hint">输入查询内容的关键词</string>
 
 </resources>

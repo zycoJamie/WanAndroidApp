@@ -37,6 +37,7 @@
         <activity android:name=".ui.mine.activity.AboutMeActivity"/>
         <activity android:name=".ui.main.activity.HotActivity"/>
         <activity android:name=".ui.main.activity.SearchActivity"/>
+        <activity android:name=".ui.main.activity.SearchResultActivity"/>
     </application>
 
 </manifest>

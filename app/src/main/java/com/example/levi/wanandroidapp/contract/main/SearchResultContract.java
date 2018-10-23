@@ -15,6 +15,14 @@ public class SearchResultContract {
 
         void getSearchResultErr(String info);
 
+        void collectArticleOK(String info);
+
+        void collectArticleErr(String info);
+
+        void cancelCollectArticleOK(String info);
+
+        void cancelCollectArticleErr(String info);
+
     }
 
     public interface Presenter extends AbsPresenter<View> {
@@ -24,6 +32,10 @@ public class SearchResultContract {
         void loadMore(String key);
 
         void getSearchResult(int page, String key);
+
+        void collectArticle(int id);
+
+        void cancelCollectArticle(int id);
 
     }
 }

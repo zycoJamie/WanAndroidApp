@@ -72,7 +72,7 @@ public class SearchActivity extends BaseRootActivity<SearchHotWordPresenter> imp
         switch (view.getId()) {
             case R.id.tv_clear: {
                 if (mHistoryList.size() > 0) {
-                    mDialog = new CommonDialog.Builder(mContext)
+                    mDialog = new CommonDialog.Builder(mActivity)
                             .setTitle(getString(R.string.search_dialog_clear_history))
                             .setContent(getString(R.string.search_dialog_clear_history_question))
                             .setPositiveClickListener(v -> {
@@ -179,7 +179,7 @@ public class SearchActivity extends BaseRootActivity<SearchHotWordPresenter> imp
     private void getSearchResult(String title) {
         Bundle bundle = new Bundle();
         bundle.putString(Constant.SEARCH_RESULT_TITLE, title);
-        SkipUtil.overlay(mContext, SearchResultActivity.class);
+        SkipUtil.overlay(mContext, SearchResultActivity.class,bundle);
     }
 
     @Override

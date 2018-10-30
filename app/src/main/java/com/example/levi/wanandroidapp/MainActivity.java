@@ -21,7 +21,7 @@ import com.example.levi.wanandroidapp.base.presenter.BasePresenter;
 import com.example.levi.wanandroidapp.model.constant.Constant;
 import com.example.levi.wanandroidapp.model.constant.EventConstant;
 import com.example.levi.wanandroidapp.model.constant.MessageEvent;
-import com.example.levi.wanandroidapp.ui.drawer.VideoActivity;
+import com.example.levi.wanandroidapp.ui.drawer.activity.VideoActivity;
 import com.example.levi.wanandroidapp.ui.knowledge.fragment.KnowledgeFragment;
 import com.example.levi.wanandroidapp.ui.login.LoginActivity;
 import com.example.levi.wanandroidapp.ui.main.activity.HotActivity;

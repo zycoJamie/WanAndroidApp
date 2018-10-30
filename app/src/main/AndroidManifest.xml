@@ -23,13 +23,14 @@
         <activity android:name=".ui.main.activity.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.VIEW" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity android:name=".MainActivity" />
         <activity android:name=".ui.login.LoginActivity" />
-        <activity android:name=".ui.drawer.VideoActivity" />
+        <activity android:name=".ui.drawer.activity.VideoActivity" />
         <activity android:name=".ui.main.activity.ArticleDetailsActivity" />
         <activity android:name=".ui.knowledge.activity.KnowledgeClassifyActivity" />
         <activity android:name=".ui.login.RegisterActivity" />

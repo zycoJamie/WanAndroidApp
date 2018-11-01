@@ -28,8 +28,8 @@ public class BaseUrlInterceptor implements Interceptor{
             //根据自定义header，得到不同的BaseUrl
             if(urlName.equals(Constant.WAN_ANDROID)){
                 baseUrl=HttpUrl.parse(AppConfig.BASE_URL);
-            }else if(urlName.equals(Constant.DOU_YU)){
-                baseUrl=HttpUrl.parse(AppConfig.DOUYU_URL);
+            }else if(urlName.equals(Constant.PANDA)){
+                baseUrl=HttpUrl.parse(AppConfig.PANDA_URL);
             }else if(urlName.equals(Constant.GET_LIVE)){
                 baseUrl=HttpUrl.parse(AppConfig.GETLIVE_URL);
             }

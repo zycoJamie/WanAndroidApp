@@ -41,7 +41,7 @@ public class Constant {
      * base url
      */
     public static final String WAN_ANDROID = "normal";
-    public static final String DOU_YU = "douyu";
+    public static final String PANDA = "panda";
     public static final String GET_LIVE = "live";
 
     /**

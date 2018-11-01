@@ -1,6 +1,7 @@
 package com.example.levi.wanandroidapp.model.api;
 
 import com.example.levi.wanandroidapp.data.collection.CollectionListBean;
+import com.example.levi.wanandroidapp.data.drawer.TypeTitle;
 import com.example.levi.wanandroidapp.data.knowledge.KnowledgeClassifyListBean;
 import com.example.levi.wanandroidapp.data.knowledge.KnowledgeListBean;
 import com.example.levi.wanandroidapp.data.login.UserInfo;
@@ -131,8 +132,19 @@ public interface ApiService {
     @GET("hotkey/json")
     Observable<BaseResponse<List<SearchHotWordBean>>> getHotWord();
 
+    /**
+     * 获取搜索结果
+     */
     @Headers({"baseUrl:normal"})
     @POST("article/query/{page}/json")
     @FormUrlEncoded
-    Observable<BaseResponse<HomePageArticleBean>> getSearchResult(@Path("page") int page,@Field("k") String key);
+    Observable<BaseResponse<HomePageArticleBean>> getSearchResult(@Path("page") int page, @Field("k") String key);
+
+    /**
+     * https://api.m.panda.tv/index.php?method=category.alllist&__plat=android&__version=4.0.32.7735&__channel=meizu
+     * 获取熊猫直播-直播类别
+     */
+    @Headers({"baseUrl:panda"})
+    @GET("index.php")
+    Observable<BaseResponse<List<TypeTitle>>> getLiveType(@Query("method") String method, @Query("__plat") String platform, @Query("__version") String version, @Query("__channel") String channel);
 }

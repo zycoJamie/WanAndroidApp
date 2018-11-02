@@ -48,6 +48,7 @@ dependencies {
     implementation rootProject.ext.dependencies["smartRefreshHeader"]
     implementation rootProject.ext.dependencies["retrofit"]
     implementation rootProject.ext.dependencies["converter-gson"]
+    implementation rootProject.ext.dependencies["converter-scalars"]
     implementation rootProject.ext.dependencies["adapter-rxjava2"]
     implementation rootProject.ext.dependencies["gson"]
     implementation rootProject.ext.dependencies["banner"]

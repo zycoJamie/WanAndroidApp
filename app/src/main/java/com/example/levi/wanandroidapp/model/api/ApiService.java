@@ -1,6 +1,7 @@
 package com.example.levi.wanandroidapp.model.api;
 
 import com.example.levi.wanandroidapp.data.collection.CollectionListBean;
+import com.example.levi.wanandroidapp.data.drawer.LiveList;
 import com.example.levi.wanandroidapp.data.drawer.TypeTitle;
 import com.example.levi.wanandroidapp.data.knowledge.KnowledgeClassifyListBean;
 import com.example.levi.wanandroidapp.data.knowledge.KnowledgeListBean;
@@ -11,10 +12,13 @@ import com.example.levi.wanandroidapp.data.main.HotBean;
 import com.example.levi.wanandroidapp.data.main.SearchHotWordBean;
 import com.example.levi.wanandroidapp.data.project.ProjectBean;
 import com.example.levi.wanandroidapp.data.project.ProjectListBean;
+import com.google.gson.JsonObject;
 
 import java.util.List;
+import java.util.Map;
 
 import io.reactivex.Observable;
+import okhttp3.ResponseBody;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -22,6 +26,7 @@ import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
+import retrofit2.http.QueryMap;
 
 /**
  * Author: Levi
@@ -147,4 +152,21 @@ public interface ApiService {
     @Headers({"baseUrl:panda"})
     @GET("index.php")
     Observable<BaseResponse<List<TypeTitle>>> getLiveType(@Query("method") String method, @Query("__plat") String platform, @Query("__version") String version, @Query("__channel") String channel);
+
+    /**
+     * https://api.m.panda.tv/ajax_get_mobile4_live_list_by_cate?cate=lol&needFilterMachine=1&pageno=1&pagenum=40&__plat=android&__version=4.0.32.7735&__channel=meizu
+     * 获取直播列表
+     */
+    @Headers({"baseUrl:panda"})
+    @GET("ajax_get_mobile4_live_list_by_cate")
+    Observable<BaseResponse<LiveList>> getLiveList(@QueryMap Map<String,String> map);
+
+    /**
+     * https://api.m.panda.tv/ajax_get_streaminfo?roomids=88911%2C727405%2C10953%2C1443421%2C1592982%2C1767074%2C351562%2C371037%2C55666%2C10225%2C195386%2C170277%2C1329861%2C1608339%2C85977%2C359916%2C400414%2C29193%2C1553837%2C1393465%2C347578%2C1224348%2C971863%2C2065813%2C805756%2C11359%2C1786610%2C257225%2C223679%2C2067686%2C534217%2C201985%2C1906822%2C406285%2C1758171%2C7000%2C1916119%2C175864%2C2025147%2C377574&__plat=android&__version=4.0.32.7735&__channel=meizu
+     * %2C其实是 ","
+     * 得到拼接直播流url的关键参数
+     */
+    @Headers({"baseUrl:panda"})
+    @GET("ajax_get_streaminfo")
+    Observable<JsonObject> getRoomInfo(@QueryMap Map<String,String> map);
 }

@@ -55,4 +55,10 @@ public class Constant {
      */
     public static final String EXTRA_USERNAME = "extra_username";
     public static final String EXTRA_PASSWORD = "extra_password";
+
+    /**
+     * live
+     */
+    public static final String CATE = "CATE";
+    public static final String ROOM = "ROOM";
 }

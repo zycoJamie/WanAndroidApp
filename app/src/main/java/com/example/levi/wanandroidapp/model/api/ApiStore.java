@@ -3,11 +3,13 @@ package com.example.levi.wanandroidapp.model.api;
 import com.example.levi.wanandroidapp.model.cookie.CookiesManager;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 /**
  * Author: Levi
@@ -15,32 +17,33 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 public class ApiStore {
     private static Retrofit sRetrofit;
-    private static String sBaseUrl=AppConfig.BASE_URL;
+    private static String sBaseUrl = AppConfig.BASE_URL;
 
     static {
         createProxy();
     }
 
     private static void createProxy() {
-        Gson gson=new GsonBuilder().setDateFormat("yyyy.MM.dd HH:mm:ss").create();
-        OkHttpClient.Builder builder=new OkHttpClient().newBuilder()
+        Gson gson = new GsonBuilder().setDateFormat("yyyy.MM.dd HH:mm:ss").create();
+        OkHttpClient.Builder builder = new OkHttpClient().newBuilder()
                 .addInterceptor(chain -> {
-                    Request original=chain.request();
-                    Request request=original.newBuilder().build();
+                    Request original = chain.request();
+                    Request request = original.newBuilder().build();
                     return chain.proceed(request);
                 })
                 .addInterceptor(new BaseUrlInterceptor())
                 .addInterceptor(new HttpLoggingInterceptor())
                 .cookieJar(new CookiesManager());
-        sRetrofit=new Retrofit.Builder()
+        sRetrofit = new Retrofit.Builder()
                 .baseUrl(sBaseUrl)
                 .addConverterFactory(GsonConverterFactory.create(gson))
+                .addConverterFactory(ScalarsConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .client(builder.build())
                 .build();
     }
 
-    public static <T> T createApi(Class<T> serviceClass){
+    public static <T> T createApi(Class<T> serviceClass) {
         return sRetrofit.create(serviceClass);
     }
 }

@@ -10,6 +10,7 @@ import com.example.levi.wanandroidapp.base.adapter.SimpleFragmentStateAdapter;
 import com.example.levi.wanandroidapp.contract.drawer.VideoContract;
 import com.example.levi.wanandroidapp.data.drawer.TypeTitle;
 import com.example.levi.wanandroidapp.presenter.drawer.VideoPresenter;
+import com.example.levi.wanandroidapp.ui.drawer.fragment.LiveListFragment;
 import com.example.levi.wanandroidapp.util.app.LogUtil;
 import com.example.levi.wanandroidapp.util.app.ToastUtil;
 import com.flyco.tablayout.SlidingTabLayout;
@@ -73,24 +74,32 @@ public class VideoActivity extends BaseActivity<VideoPresenter> implements Video
     @Override
     public void getLiveTitleOk(List<TypeTitle> typeTitles) {
         if (typeTitles != null && typeTitles.size() > 0) {
+            //lol
             for (int i = 0; i < 3; i++) {
-                if (i == 1) {
-                    continue;
+                if (i == 0) {
+                    mTitles.add(typeTitles.get(0).getChild_data().get(i).getCname());
+                    mFragments.add(LiveListFragment.getInstance(typeTitles.get(0).getChild_data().get(i).getEname()));
                 }
-                mTitles.add(typeTitles.get(0).getChild_data().get(i).getCname());
-                mFragments.add(new Fragment());
             }
-            for (int i = 0; i < 4; i++) {
-                if (i == 1 || i == 2) {
-                    continue;
-                }
-                mTitles.add(typeTitles.get(1).getChild_data().get(i).getCname());
-                mFragments.add(new Fragment());
-            }
+            //刺激战场
             for (int i = 0; i < 5; i++) {
-                if (i == 1 || i == 4) {
+                if (i == 0 || i == 3) {
                     mTitles.add(typeTitles.get(2).getChild_data().get(i).getCname());
-                    mFragments.add(new Fragment());
+                    mFragments.add(LiveListFragment.getInstance(typeTitles.get(2).getChild_data().get(i).getEname()));
+                }
+            }
+            //绝地求生
+            for (int i = 0; i < 5; i++) {
+                if (i == 1) {
+                    mTitles.add(typeTitles.get(4).getChild_data().get(i).getCname());
+                    mFragments.add(LiveListFragment.getInstance(typeTitles.get(4).getChild_data().get(i).getEname()));
+                }
+            }
+            //王者荣耀
+            for (int i = 0; i < 7; i++) {
+                if (i == 1 || i == 6) {
+                    mTitles.add(typeTitles.get(3).getChild_data().get(i).getCname());
+                    mFragments.add(LiveListFragment.getInstance(typeTitles.get(3).getChild_data().get(i).getEname()));
                 }
             }
         }

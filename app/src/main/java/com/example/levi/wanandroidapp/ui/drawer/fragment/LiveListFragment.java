@@ -21,6 +21,9 @@ import com.example.levi.wanandroidapp.util.app.LogUtil;
 import com.example.levi.wanandroidapp.util.app.ToastUtil;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -149,7 +152,20 @@ public class LiveListFragment extends BaseRootFragment<LiveListPresenter> implem
     @Override
     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
         Intent intent = new Intent(getActivity(), PandaLiveRoomActivity.class);
+        String id=mAdapter.getData().get(position).getId();
+        String room_key="initial room_key";
+        try {
+            JSONObject object=new JSONObject(mPresenter.getStreamInfo());
+            JSONObject directChildObject=object.getJSONObject("data");
+            JSONObject childObject=directChildObject.getJSONObject(id);
+            room_key=childObject.getString("room_key");
+        } catch (JSONException e) {
+            e.printStackTrace();
+            LogUtil.e(e.getMessage());
+        }
+        LogUtil.i(TAG,room_key);
         intent.putExtra(Constant.ROOM, mAdapter.getData().get(position));
+        intent.putExtra(Constant.ROOM_KEY,room_key);
         startActivity(intent);
     }
 }

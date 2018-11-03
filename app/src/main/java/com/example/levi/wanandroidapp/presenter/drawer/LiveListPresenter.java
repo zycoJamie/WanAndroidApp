@@ -19,10 +19,10 @@ public class LiveListPresenter extends BasePresenter<LiveListContract.View> impl
     private static final String TAG = LiveListPresenter.class.getSimpleName();
     private String mPage = "1";
     private boolean isRefresh = true;
-    private String mRoomInfo;
+    private String mStreamInfo;
 
-    public String getmRoomInfo() {
-        return mRoomInfo;
+    public String getStreamInfo() {
+        return mStreamInfo;
     }
 
 
@@ -63,7 +63,7 @@ public class LiveListPresenter extends BasePresenter<LiveListContract.View> impl
                 .compose(RxUtil.rxSchedulerHelper())
                 .subscribe(jsonString -> {
                     LogUtil.i(TAG, jsonString.toString());
-                    mRoomInfo = jsonString.toString();
+                    mStreamInfo = jsonString.toString();
                 }, throwable -> LogUtil.i(TAG, throwable.getMessage())));
     }
 

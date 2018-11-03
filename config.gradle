@@ -46,6 +46,8 @@ ext {
             recyclerAdapterHelperVersion: "2.9.42",
             //agentWebView
             agentWebViewVersion         : "4.0.2",
+            //ijkplayerVersion
+            ijkplayerVersion            : "0.8.8",
     ]
 
     dependencies = [
@@ -100,6 +102,8 @@ ext {
             "recyclerAdapterHelper": "com.github.CymChad:BaseRecyclerViewAdapterHelper:${version["recyclerAdapterHelperVersion"]}",
             //agentWebView
             "agentWebView"         : "com.just.agentweb:agentweb:${version["agentWebViewVersion"]}",
+            //ijkplayer
+            "ijkplayer"            : "tv.danmaku.ijk.media:ijkplayer-java:${version["ijkplayerVersion"]}",
     ]
 
 

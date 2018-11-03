@@ -21,6 +21,11 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+    sourceSets{
+        main{
+            jniLibs.srcDirs=['libs']
+        }
+    }
 }
 
 dependencies {
@@ -57,5 +62,6 @@ dependencies {
     implementation rootProject.ext.dependencies["agentWebView"]
     implementation rootProject.ext.dependencies["tabLayout"]
     implementation rootProject.ext.dependencies["tagFlowLayout"]
+    implementation rootProject.ext.dependencies["ijkplayer"]
 
 }

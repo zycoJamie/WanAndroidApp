@@ -61,4 +61,5 @@ public class Constant {
      */
     public static final String CATE = "CATE";
     public static final String ROOM = "ROOM";
+    public static final String ROOM_KEY = "ROOM_KEY";
 }

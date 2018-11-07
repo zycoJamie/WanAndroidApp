@@ -32,6 +32,8 @@ public class LiveLoadingView extends View {
     private RectF mRoundRectF;
     private MyHandler mHandler;
 
+    private RectF mRectF;
+
     public LiveLoadingView(Context context) {
         this(context, null);
     }
@@ -71,6 +73,20 @@ public class LiveLoadingView extends View {
         mRotateCenter = new PointF();
         mRoundRectF = new RectF();
         mHandler = new MyHandler(this);
+
+    }
+
+    @Override
+    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+        super.onSizeChanged(w, h, oldw, oldh);
+        mOuterCircleRadius = (int) Math.min(mOuterCircleRadius, (Math.min(w - getPaddingLeft() - getPaddingRight(), h - getPaddingBottom() - getPaddingTop()) - 4 * mPaint.getStrokeWidth()) / 2);
+        if (mOuterCircleRadius < 0) {
+            mStrokeWidth = Math.min(w - getPaddingRight() - getPaddingLeft(), h - getPaddingTop() - getPaddingBottom()) / 2;
+            mOuterCircleRadius = Math.min(w - getPaddingRight() - getPaddingLeft(), h - getPaddingTop() - getPaddingBottom()) / 4;
+        }
+        float left = (w - 2 * mOuterCircleRadius) / 2;
+        float top = (h - 2 * mOuterCircleRadius) / 2;
+        float diameter=2*mOuterCircleRadius;
 
     }
 

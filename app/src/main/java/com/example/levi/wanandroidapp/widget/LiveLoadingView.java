@@ -163,6 +163,7 @@ public class LiveLoadingView extends View {
             canvas.save();
             canvas.rotate(mRotateAngle, mRotateCenter.x, mRotateCenter.y);
             canvas.drawPath(mPath, mTrianglePaint);
+            canvas.restore();
         } else {
             mProgress += mDel;
             if (mProgress >= 360) {

@@ -2,6 +2,7 @@ package com.example.levi.wanandroidapp.widget;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.PointF;
@@ -33,6 +34,11 @@ public class LiveLoadingView extends View {
     private MyHandler mHandler;
 
     private RectF mRectF;
+    private boolean isReverse = false;
+    private int mDel = 30;
+    private int mProgress = 0;
+    private int mStartAngle = -90;
+    private int mRotateAngle = 0;
 
     public LiveLoadingView(Context context) {
         this(context, null);
@@ -79,6 +85,7 @@ public class LiveLoadingView extends View {
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
+        //外圆半径
         mOuterCircleRadius = (int) Math.min(mOuterCircleRadius, (Math.min(w - getPaddingLeft() - getPaddingRight(), h - getPaddingBottom() - getPaddingTop()) - 4 * mPaint.getStrokeWidth()) / 2);
         if (mOuterCircleRadius < 0) {
             mStrokeWidth = Math.min(w - getPaddingRight() - getPaddingLeft(), h - getPaddingTop() - getPaddingBottom()) / 2;
@@ -86,8 +93,87 @@ public class LiveLoadingView extends View {
         }
         float left = (w - 2 * mOuterCircleRadius) / 2;
         float top = (h - 2 * mOuterCircleRadius) / 2;
-        float diameter=2*mOuterCircleRadius;
+        float diameter = 2 * mOuterCircleRadius;
+        mRectF = new RectF(left, top, left + diameter, top + diameter);
 
+        //内圆半径
+        mInnerTriangleRadius = (mInnerTriangleRadius < mOuterCircleRadius) ? mInnerTriangleRadius : 3 * mOuterCircleRadius / 5;
+        if (mInnerTriangleRadius < 0) {
+            mInnerTriangleRadius = 0;
+        }
+
+        //圆心
+        float centerX = left + mOuterCircleRadius;
+        float centerY = top + mOuterCircleRadius;
+
+        //内圆的内接三角形的三个定点组成的path
+        mPath.moveTo(centerX - mInnerTriangleRadius / 2, (float) (centerY - Math.sqrt(3) * mInnerTriangleRadius / 2));
+        mPath.lineTo(centerX + mInnerTriangleRadius, centerY);
+        mPath.lineTo(centerX - mInnerTriangleRadius / 2, (float) (centerY + Math.sqrt(3) * mInnerTriangleRadius / 2));
+        mPath.close();
+
+        mRotateCenter.set(getMeasuredWidth() / 2, getMeasuredHeight() / 2);
+        mRoundRectF.left = 0;
+        mRoundRectF.top = 0;
+        mRoundRectF.right = w;
+        mRoundRectF.bottom = h;
+    }
+
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        setMeasuredDimension(measureSize(widthMeasureSpec), measureSize(heightMeasureSpec));
+    }
+
+    private int measureSize(int measureSpec) {
+        int specMode = MeasureSpec.getMode(measureSpec);
+        int specSize = MeasureSpec.getSize(measureSpec);
+        int resultSize = 150;
+        switch (specMode) {
+            case MeasureSpec.EXACTLY: {
+                resultSize = specSize;
+                break;
+            }
+            case MeasureSpec.AT_MOST: {
+
+            }
+            case MeasureSpec.UNSPECIFIED: {
+                resultSize = Math.min(specSize, resultSize);
+                break;
+            }
+        }
+        return resultSize;
+    }
+
+    @Override
+    protected void onDraw(Canvas canvas) {
+        if (mIsNeedBackground) {
+            canvas.drawRoundRect(mRoundRectF, 8, 8, mBackgroundPaint);
+        }
+        if (isReverse) {
+            mProgress -= mDel;
+            mStartAngle += mDel;
+            if (mStartAngle >= 270) {
+                mStartAngle = -90;
+                isReverse = false;
+            }
+            mRotateAngle += mDel;
+            if (mRotateAngle >= 360) {
+                mRotateAngle = 0;
+            }
+            canvas.save();
+            canvas.rotate(mRotateAngle, mRotateCenter.x, mRotateCenter.y);
+            canvas.drawPath(mPath, mTrianglePaint);
+        } else {
+            mProgress += mDel;
+            if (mProgress >= 360) {
+                isReverse = true;
+            }
+            //绘制内部三角形
+            canvas.drawPath(mPath, mTrianglePaint);
+        }
+        //绘制外部圆
+        canvas.drawArc(mRectF, mStartAngle, mProgress, false, mPaint);
+        mHandler.sendEmptyMessageDelayed(MyHandler.REFRESH_VIEW, 100);
     }
 
     private static class MyHandler extends Handler {

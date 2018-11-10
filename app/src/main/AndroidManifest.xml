@@ -38,7 +38,9 @@
         <activity android:name=".ui.main.activity.HotActivity"/>
         <activity android:name=".ui.main.activity.SearchActivity"/>
         <activity android:name=".ui.main.activity.SearchResultActivity"/>
-        <activity android:name=".ui.drawer.activity.PandaLiveRoomActivity"/>
+        <activity android:name=".ui.drawer.activity.PandaLiveRoomActivity"
+            android:configChanges="orientation|screenSize|navigation"
+            android:windowSoftInputMode="stateHidden|adjustResize"/>
     </application>
 
 </manifest>

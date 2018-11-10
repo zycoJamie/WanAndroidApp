@@ -94,6 +94,8 @@
     <string name="search_menu_query_hint">输入查询内容的关键词</string>
     <!-- video -->
     <string name="video_title">熊猫直播</string>
+    <string name="video_play_error">获取直播失败</string>
+    <string name="video_net_error">网络似乎出故障啦</string>
 
     <!-- ijkPlayer -->
     <string name="N_A">N/A</string>

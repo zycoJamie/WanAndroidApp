@@ -383,7 +383,7 @@ public class LiveList {
             this.items = items;
         }
 
-        public static class ClassificationBean {
+        public static class ClassificationBean  implements Serializable{
             /**
              * cname : 英雄联盟
              * ename : lol
@@ -409,7 +409,7 @@ public class LiveList {
             }
         }
 
-        public static class UserinfoBean {
+        public static class UserinfoBean implements Serializable {
             /**
              * rid : 119820706
              * userName :
@@ -455,7 +455,7 @@ public class LiveList {
             }
         }
 
-        public static class RoomActivityBean {
+        public static class RoomActivityBean implements Serializable {
             /**
              * type : 4
              * value : 抽奖
@@ -481,7 +481,7 @@ public class LiveList {
             }
         }
 
-        public static class SkininfoBean {
+        public static class SkininfoBean implements Serializable {
             /**
              * skin_type : 1
              * img_top : http://i6.pdim.gs/d011a98a49902e36b3cc71b7df9e97e2.png
@@ -557,7 +557,7 @@ public class LiveList {
             }
         }
 
-        public static class ItemsBean {
+        public static class ItemsBean implements Serializable {
             /**
              * id : 371037
              * name : lol-S8-371037

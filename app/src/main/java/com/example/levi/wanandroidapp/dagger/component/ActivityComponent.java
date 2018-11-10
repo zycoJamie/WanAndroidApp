@@ -2,6 +2,7 @@ package com.example.levi.wanandroidapp.dagger.component;
 
 
 import com.example.levi.wanandroidapp.dagger.module.ActivityModule;
+import com.example.levi.wanandroidapp.ui.drawer.activity.PandaLiveRoomActivity;
 import com.example.levi.wanandroidapp.ui.drawer.activity.VideoActivity;
 import com.example.levi.wanandroidapp.ui.login.LoginActivity;
 import com.example.levi.wanandroidapp.ui.login.RegisterActivity;
@@ -30,4 +31,6 @@ public interface ActivityComponent {
     void inject(SearchResultActivity searchResultActivity);
 
     void inject(VideoActivity videoActivity);
+
+    void inject(PandaLiveRoomActivity pandaLiveRoomActivity);
 }

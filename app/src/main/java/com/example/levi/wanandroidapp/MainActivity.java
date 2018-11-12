@@ -1,6 +1,5 @@
 package com.example.levi.wanandroidapp;
 
-import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -43,7 +42,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.OnClick;
 
-public class MainActivity extends BaseRootActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends BaseRootActivity {
 
     @BindView(R.id.bnv_view)
     BottomNavigationView mBottomNavigationView;
@@ -58,6 +57,7 @@ public class MainActivity extends BaseRootActivity implements NavigationView.OnN
 
     private ImageView mAvatarIv;
     private TextView mNameTv;
+    private ImageView mPandaIv;
     private BasePresenter mPresenter;
     private List<Fragment> mFragments;
     private int mLastIndex; //上一个fragment的index
@@ -74,10 +74,10 @@ public class MainActivity extends BaseRootActivity implements NavigationView.OnN
         View headerView = mLeftNav.inflateHeaderView(R.layout.nav_header_view);
         mAvatarIv = headerView.findViewById(R.id.iv_avatar);
         mNameTv = headerView.findViewById(R.id.tv_name);
+        mPandaIv = headerView.findViewById(R.id.iv_go_to_live);
         mPresenter = new BasePresenter();
         initFragment();
         selectFragment(0);
-        mLeftNav.setNavigationItemSelectedListener(this);
     }
 
     @Override
@@ -125,6 +125,13 @@ public class MainActivity extends BaseRootActivity implements NavigationView.OnN
                 (String) SharedPreferenceUtil.get(mActivity, Constant.USERNAME, "") : getString(R.string.drawer_login));
         GlideUtil.loadCircleImage(mActivity, R.mipmap.user_avatar, mAvatarIv);
         mAvatarIv.setOnClickListener((v) -> SkipUtil.overlay(mActivity, LoginActivity.class));
+        mPandaIv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mDrawerLayout.closeDrawer(Gravity.START);
+                mDrawerLayout.postDelayed(() -> SkipUtil.overlay(mActivity, VideoActivity.class), 400);
+            }
+        });
     }
 
     /**
@@ -159,13 +166,8 @@ public class MainActivity extends BaseRootActivity implements NavigationView.OnN
         });
     }
 
-    /**
-     * 左侧抽屉菜单的子项单击事件
-     *
-     * @param item
-     * @return
-     */
-    @Override
+
+    /*@Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.nav_item_video: {
@@ -175,7 +177,7 @@ public class MainActivity extends BaseRootActivity implements NavigationView.OnN
             }
         }
         return true;
-    }
+    }*/
 
     @OnClick(R.id.fb_scroll_2_top)
     public void floatActionButtonClick(View view) {

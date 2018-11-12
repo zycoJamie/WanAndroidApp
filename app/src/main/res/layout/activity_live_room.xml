@@ -274,6 +274,11 @@
         android:layout_below="@id/rl_video"
         android:background="@color/white_255"
         android:orientation="vertical">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@mipmap/ic_panda_tv"
+            android:scaleType="fitXY"/>
 
         <!--<com.flyco.tablayout.SlidingTabLayout
             android:id="@+id/tab_layout"

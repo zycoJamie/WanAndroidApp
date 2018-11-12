@@ -28,6 +28,9 @@ import com.example.levi.wanandroidapp.util.app.ToastUtil;
 import butterknife.BindView;
 import butterknife.OnClick;
 
+/**
+ * 未能获取到直播流，目前播放的是主播上传的精彩视频片段
+ */
 public class PandaLiveRoomActivity extends BaseActivity<PandaLivePresenter> implements PandaLiveContract.View {
 
     private static final String TAG = PandaLiveRoomActivity.class.getSimpleName();
@@ -73,7 +76,6 @@ public class PandaLiveRoomActivity extends BaseActivity<PandaLivePresenter> impl
     RelativeLayout mShare;
 
     private LiveList.ItemsBeanX mRoomInfo;
-    private String mRoomId;
     private int mScreenWidth;
     private PlayerManager mPlayerManager;
     private RelativeLayout.LayoutParams params;
@@ -83,7 +85,7 @@ public class PandaLiveRoomActivity extends BaseActivity<PandaLivePresenter> impl
     private int mShowLightness;
     private GestureDetector mGestureDetector;
     private String mLiveStreamUrl;
-    private String roomKey;
+    private int rid; //用于请求直播源
 
     @Override
     protected void initInject() {
@@ -93,7 +95,6 @@ public class PandaLiveRoomActivity extends BaseActivity<PandaLivePresenter> impl
     @Override
     protected void initUI() {
         mRoomInfo = (LiveList.ItemsBeanX) getIntent().getSerializableExtra(Constant.ROOM);
-        mRoomId = mRoomInfo.getId();
         mTitleTv.setText(mRoomInfo.getName());
         DisplayMetrics metrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(metrics);
@@ -108,9 +109,8 @@ public class PandaLiveRoomActivity extends BaseActivity<PandaLivePresenter> impl
     @Override
     protected void initData() {
         viewLoading.setVisibility(View.VISIBLE);
-        roomKey = getIntent().getStringExtra(Constant.ROOM_KEY);
-        mLiveStreamUrl = "https://p2ptest1.p2p.liveplay.myqcloud.com/video/".concat(roomKey).concat("/info/");
-        startLive();
+        rid = mRoomInfo.getUserinfo().getRid();
+        mPresenter.getLiveUrl(rid);
     }
 
     @Override
@@ -182,8 +182,6 @@ public class PandaLiveRoomActivity extends BaseActivity<PandaLivePresenter> impl
                                 changeLightness(-1);
                             }
                         }
-                    } else {
-
                     }
                     return false;
                 }
@@ -282,7 +280,7 @@ public class PandaLiveRoomActivity extends BaseActivity<PandaLivePresenter> impl
         ijkVideoView.setOnCompletionListener(iMediaPlayer -> ToastUtil.show(mActivity, getString(R.string.video_net_error)));
     }
 
-    @OnClick({R.id.view_back, R.id.view_play, R.id.view_full_screen, R.id.view_share, R.id.view_refresh})
+    @OnClick({R.id.view_back, R.id.view_play, R.id.view_full_screen, R.id.view_share, R.id.view_refresh, R.id.view_land_play, R.id.view_exit_full_screen})
     void click(View view) {
         switch (view.getId()) {
             case R.id.view_back: {
@@ -290,6 +288,16 @@ public class PandaLiveRoomActivity extends BaseActivity<PandaLivePresenter> impl
                     setOrCancelFullScreen();
                 } else {
                     onBackPressedSupport();
+                }
+                break;
+            }
+            case R.id.view_land_play: {
+                if (ijkVideoView != null && ijkVideoView.isPlaying()) {
+                    mImageLandPlay.setImageResource(R.mipmap.ic_pause);
+                    ijkVideoView.pause();
+                } else {
+                    mImageLandPlay.setImageResource(R.mipmap.ic_play);
+                    ijkVideoView.start();
                 }
                 break;
             }
@@ -304,6 +312,10 @@ public class PandaLiveRoomActivity extends BaseActivity<PandaLivePresenter> impl
                 break;
             }
             case R.id.view_full_screen: {
+                setOrCancelFullScreen();
+                break;
+            }
+            case R.id.view_exit_full_screen: {
                 setOrCancelFullScreen();
                 break;
             }
@@ -338,6 +350,7 @@ public class PandaLiveRoomActivity extends BaseActivity<PandaLivePresenter> impl
 
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
         if (isLandscape()) {
             setVisible(viewTop, viewLandscapeBottom);
             setGone(viewPortraitBottom);
@@ -376,5 +389,18 @@ public class PandaLiveRoomActivity extends BaseActivity<PandaLivePresenter> impl
             mPlayerManager.stop();
             mPlayerManager.onDestroy();
         }
+    }
+
+    @Override
+    public void getLiveUrlSuccess(String url) {
+        LogUtil.i(TAG, "url：" + url);
+        mLiveStreamUrl = url;
+        startLive();
+    }
+
+    @Override
+    public void getLiveUrlError(String errMsg) {
+        ToastUtil.show(mContext, getString(R.string.video_url_null));
+        LogUtil.i(TAG, errMsg);
     }
 }

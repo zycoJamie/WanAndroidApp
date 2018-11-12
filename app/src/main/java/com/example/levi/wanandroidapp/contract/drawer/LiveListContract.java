@@ -23,7 +23,5 @@ public class LiveListContract {
 
         void getLiveList(String cate);
 
-        void getRoomInfo(String roomids);
-
     }
 }

@@ -129,6 +129,10 @@ public class ProjectListFragment extends BaseRootFragment<ProjectListPresenter> 
                 reload();
                 break;
             }
+            case EventConstant.PROJECT_SCROLL_2_TOP: {
+                mRecyclerView.smoothScrollToPosition(0);
+                break;
+            }
         }
     }
 

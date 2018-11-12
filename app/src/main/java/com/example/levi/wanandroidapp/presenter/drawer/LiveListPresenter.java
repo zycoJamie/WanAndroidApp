@@ -19,12 +19,6 @@ public class LiveListPresenter extends BasePresenter<LiveListContract.View> impl
     private static final String TAG = LiveListPresenter.class.getSimpleName();
     private String mPage = "1";
     private boolean isRefresh = true;
-    private String mStreamInfo;
-
-    public String getStreamInfo() {
-        return mStreamInfo;
-    }
-
 
     @Inject
     public LiveListPresenter() {
@@ -54,19 +48,6 @@ public class LiveListPresenter extends BasePresenter<LiveListContract.View> impl
                 .subscribe(listBaseResponse -> mView.getLiveListOk(listBaseResponse.getData(), isRefresh), throwable -> mView.getLiveListErr(throwable.getMessage())));
     }
 
-    @SuppressWarnings("unchecked")
-    @Override
-    public void getRoomInfo(String roomids) {
-        Map<String, String> map = getCommonParamsLiveRoom(roomids);
-        mCompositeDisposable.add(ApiStore.createApi(ApiService.class)
-                .getRoomInfo(map)
-                .compose(RxUtil.rxSchedulerHelper())
-                .subscribe(jsonString -> {
-                    LogUtil.i(TAG, jsonString.toString());
-                    mStreamInfo = jsonString.toString();
-                }, throwable -> LogUtil.i(TAG, throwable.getMessage())));
-    }
-
     /**
      * 构造参数列表
      */
@@ -76,18 +57,6 @@ public class LiveListPresenter extends BasePresenter<LiveListContract.View> impl
         params.put("needFilterMachine", "1");
         params.put("pageno", mPage);
         params.put("pagenum", "40");
-        params.put("__plat", "android");
-        params.put("__version", "4.0.32.7735");
-        params.put("__channel", "meizu");
-        return params;
-    }
-
-    /**
-     * 构造参数列表
-     */
-    private Map getCommonParamsLiveRoom(String roomids) {
-        Map<String, String> params = new ArrayMap<>();
-        params.put("roomids", roomids);
         params.put("__plat", "android");
         params.put("__version", "4.0.32.7735");
         params.put("__channel", "meizu");

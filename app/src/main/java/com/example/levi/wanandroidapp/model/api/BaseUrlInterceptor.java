@@ -31,7 +31,7 @@ public class BaseUrlInterceptor implements Interceptor{
             }else if(urlName.equals(Constant.PANDA)){
                 baseUrl=HttpUrl.parse(AppConfig.PANDA_URL);
             }else if(urlName.equals(Constant.GET_LIVE)){
-                baseUrl=HttpUrl.parse(AppConfig.GETLIVE_URL);
+                baseUrl=HttpUrl.parse(AppConfig.GET_LIVE_URL);
             }
             //构造新的请求URL
             HttpUrl newHttpUrl=oldUrl.newBuilder()

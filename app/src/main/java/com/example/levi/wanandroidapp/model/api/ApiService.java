@@ -2,6 +2,7 @@ package com.example.levi.wanandroidapp.model.api;
 
 import com.example.levi.wanandroidapp.data.collection.CollectionListBean;
 import com.example.levi.wanandroidapp.data.drawer.LiveList;
+import com.example.levi.wanandroidapp.data.drawer.StreamUrl;
 import com.example.levi.wanandroidapp.data.drawer.TypeTitle;
 import com.example.levi.wanandroidapp.data.knowledge.KnowledgeClassifyListBean;
 import com.example.levi.wanandroidapp.data.knowledge.KnowledgeListBean;
@@ -162,11 +163,10 @@ public interface ApiService {
     Observable<BaseResponse<LiveList>> getLiveList(@QueryMap Map<String,String> map);
 
     /**
-     * https://api.m.panda.tv/ajax_get_streaminfo?roomids=88911%2C727405%2C10953%2C1443421%2C1592982%2C1767074%2C351562%2C371037%2C55666%2C10225%2C195386%2C170277%2C1329861%2C1608339%2C85977%2C359916%2C400414%2C29193%2C1553837%2C1393465%2C347578%2C1224348%2C971863%2C2065813%2C805756%2C11359%2C1786610%2C257225%2C223679%2C2067686%2C534217%2C201985%2C1906822%2C406285%2C1758171%2C7000%2C1916119%2C175864%2C2025147%2C377574&__plat=android&__version=4.0.32.7735&__channel=meizu
-     * %2C其实是 ","
-     * 得到拼接直播流url的关键参数
+     * 通过https://vod.gate.panda.tv/api/hostvideos?hostid=21159862&pageno=1&pagenum=10&isinfo=1&__version=4.0.32.7735&__plat=android&__channel=meizu
+     * 得到"v_url": "https://pl-vod28.live.panda.tv/transcode/135069/2018-11-08/7f1eeaaa85b18af20907bc1b17c426ba/index.m3u8" 直播源
      */
-    @Headers({"baseUrl:panda"})
-    @GET("ajax_get_streaminfo")
-    Observable<JsonObject> getRoomInfo(@QueryMap Map<String,String> map);
+    @Headers({"baseUrl:live"})
+    @GET("api/hostvideos")
+    Observable<BaseResponse<StreamUrl>> getLiveUrl(@QueryMap Map<String,String> map);
 }

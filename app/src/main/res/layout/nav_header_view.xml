@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_200"
@@ -20,8 +21,22 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="@dimen/dp_12"
+            android:layout_marginBottom="@dimen/dp_12"
             android:textColor="@color/white_255"
             android:textSize="@dimen/sp_16"
             android:id="@+id/tv_name"/>
     </LinearLayout>
-</RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_400">
+        <ImageView
+            android:id="@+id/iv_go_to_live"
+            android:layout_centerInParent="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/ic_panda_left_nav"
+            android:scaleType="centerInside"
+            android:scaleY="2"
+            android:scaleX="2"/>
+    </RelativeLayout>
+</LinearLayout>

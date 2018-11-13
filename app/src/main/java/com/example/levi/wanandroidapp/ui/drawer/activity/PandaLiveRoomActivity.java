@@ -238,6 +238,7 @@ public class PandaLiveRoomActivity extends BaseActivity<PandaLivePresenter> impl
         } else if (mShowVolume < 0) {
             mShowVolume = 0;
         }
+        mTvControlNum.setText(mShowVolume + "%");
         mTvControlName.setText("音量");
         mImageControl.setImageResource(R.mipmap.ic_volume);
         int valueVolume = mShowVolume * mMaxVolume / 100;
@@ -277,7 +278,6 @@ public class PandaLiveRoomActivity extends BaseActivity<PandaLivePresenter> impl
                 ToastUtil.show(mActivity, getString(R.string.video_play_error));
             }
         });
-        ijkVideoView.setOnCompletionListener(iMediaPlayer -> ToastUtil.show(mActivity, getString(R.string.video_net_error)));
     }
 
     @OnClick({R.id.view_back, R.id.view_play, R.id.view_full_screen, R.id.view_share, R.id.view_refresh, R.id.view_land_play, R.id.view_exit_full_screen})

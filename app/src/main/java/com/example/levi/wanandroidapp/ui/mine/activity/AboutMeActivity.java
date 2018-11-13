@@ -125,7 +125,7 @@ public class AboutMeActivity extends BaseActivity implements AppBarLayout.OnOffs
         StringBuilder stringBuilder = new StringBuilder();
         try {
             stringBuilder.append(getString(R.string.app_name))
-                    .append("V")
+                    .append(" V")
                     .append(getPackageManager().getPackageInfo(getPackageName(), 0).versionName);
             mVersionTv.setText(stringBuilder.toString());
         } catch (PackageManager.NameNotFoundException e) {

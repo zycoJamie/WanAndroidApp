@@ -76,7 +76,8 @@
                     android:layout_height="@dimen/dp_60"
                     android:layout_gravity="center"
                     android:layout_marginTop="@dimen/dp_16"
-                    android:src="@mipmap/android"/>
+                    android:scaleType="fitXY"
+                    android:src="@mipmap/app_icon_android"/>
                 <TextView
                     android:id="@+id/tv_version"
                     android:layout_width="wrap_content"
